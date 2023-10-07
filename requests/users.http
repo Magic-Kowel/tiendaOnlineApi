@@ -1,0 +1,17 @@
+@api=  http://localhost:3000/api
+GET  {{api}}/user
+###
+GET  {{api}}/user/c36380e0fb8d273f7f5ea74b55970214
+###
+GET  {{api}}/user/email/a20170094@utem.edu.mx
+#### 
+POST {{api}}/user
+content-type:application/json
+
+{
+    "name": "josuemagico",
+    "lastName":"morfin",
+    "password":"123456",
+    "email":"yioootakucosplay@gmail.com",
+    "birthDate":"1998-08-29"
+}
