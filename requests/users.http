@@ -15,3 +15,10 @@ content-type:application/json
     "email":"yioootakucosplay@gmail.com",
     "birthDate":"1998-08-29"
 }
+###
+PUT {{api}}/user/validate
+content-type:application/json
+
+{
+    "uid":"2660376e-dbf8-44c1-b69f-b2554e3e5d4c"
+}

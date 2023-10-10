@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-09-2023 a las 23:25:26
+-- Tiempo de generación: 08-10-2023 a las 21:35:47
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -24,6 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `bitmensajesala`
+--
+
+CREATE TABLE `bitmensajesala` (
+  `eocdBitMensajesSala` varchar(50) NOT NULL,
+  `ecodrelSalaUsuarioProductos` varchar(50) NOT NULL,
+  `tMensaje` varchar(50) NOT NULL,
+  `lista` int(50) NOT NULL,
+  `ecodUsuario` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `catcategoria`
 --
 
@@ -31,6 +45,36 @@ CREATE TABLE `catcategoria` (
   `ecodCategoria` varchar(50) NOT NULL,
   `tNombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `catcotcontroller`
+--
+
+CREATE TABLE `catcotcontroller` (
+  `ecodControler` varchar(250) NOT NULL,
+  `tNombre` varchar(50) NOT NULL,
+  `turl` varchar(100) NOT NULL,
+  `ecodCreacion` varchar(50) NOT NULL,
+  `fhCreacion` date NOT NULL,
+  `ecodEstatus` varchar(50) NOT NULL,
+  `ecodEdicion` varchar(50) DEFAULT NULL,
+  `fhEdicion` datetime DEFAULT NULL,
+  `ecodEliminacion` varchar(50) DEFAULT NULL,
+  `fhEliminacion` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `catcotcontroller`
+--
+
+INSERT INTO `catcotcontroller` (`ecodControler`, `tNombre`, `turl`, `ecodCreacion`, `fhCreacion`, `ecodEstatus`, `ecodEdicion`, `fhEdicion`, `ecodEliminacion`, `fhEliminacion`) VALUES
+('0dc30708-9685-4585-8d57-b3b5a5b040bf', 'Editar Controladores', '/catalogo/controllers/registrar', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-04', 'ubsvkbvukabvoeho8veowbve', NULL, NULL, NULL, NULL),
+('ca8b8695-531b-42f3-866c-c19888199eb8', 'Editar usuarios', '/catalogo/usuario/registrar', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-04', 'ubsvkbvukabvoeho8veowbve', NULL, NULL, NULL, NULL),
+('f14ed459-06f0-4599-98b6-96b472f174d4', 'Editar Submenu', '/catalogo/submenu/registrar', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-04', 'ubsvkbvukabvoeho8veowbve', NULL, NULL, NULL, NULL),
+('f29bcca1-7a43-4208-8e3b-bd18f6cb0afd', 'Editar menu', '/catalogo/menu/registrar', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-04', 'ubsvkbvukabvoeho8veowbve', NULL, NULL, NULL, NULL),
+('f9855625-6660-453d-b765-cd71dbf40153', 'Asignar permisos', '/sistemas/asignasionPermisos', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-05', 'ubsvkbvukabvoeho8veowbve', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -91,6 +135,42 @@ CREATE TABLE `catestatus` (
   `ecodEstatus` varchar(50) NOT NULL,
   `tNombre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `catestatus`
+--
+
+INSERT INTO `catestatus` (`ecodEstatus`, `tNombre`) VALUES
+('01ae3cd3-144c-46a3-99aa-bb9174761b37', 'En proceso'),
+('2660376e-dbf8-44c1-b69f-b2554e3e5d4c', 'Activo'),
+('5bf018a2-07c0-497e-b376-94531e337dad', 'Cancelado'),
+('93a484c5-ce42-435e-98ac-12bc215d95b5', 'Terminado'),
+('fa6cc9a2-f221-4e27-b575-1fac2698d27a', 'Eliminado');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `catmenu`
+--
+
+CREATE TABLE `catmenu` (
+  `ecodMenu` varchar(250) NOT NULL,
+  `tNombre` varchar(25) NOT NULL,
+  `Iconos` varchar(150) DEFAULT NULL,
+  `ecodCreacion` varchar(50) NOT NULL,
+  `fhCreacion` date NOT NULL,
+  `ecodEdicion` varchar(50) DEFAULT NULL,
+  `fhEdicion` datetime DEFAULT NULL,
+  `ecodEstatus` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `catmenu`
+--
+
+INSERT INTO `catmenu` (`ecodMenu`, `tNombre`, `Iconos`, `ecodCreacion`, `fhCreacion`, `ecodEdicion`, `fhEdicion`, `ecodEstatus`) VALUES
+('30e33d73-c153-465d-bc2d-059c3c068205', 'Sistemas', '', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-08-24', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c'),
+('9bd00aa8-7232-44dc-bcb7-f209d503e391', 'Catalogo', 'fa fa-user  fa-2x', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-08-24', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c');
 
 -- --------------------------------------------------------
 
@@ -2570,6 +2650,29 @@ INSERT INTO `catmunicipios` (`ecodMunicipio`, `tNombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `catproductos`
+--
+
+CREATE TABLE `catproductos` (
+  `ecodProductos` varchar(50) NOT NULL,
+  `tNombre` varchar(50) NOT NULL,
+  `nPrecio` float NOT NULL,
+  `nDescuento` float DEFAULT NULL,
+  `nStock` int(11) NOT NULL,
+  `ecodCategoria` varchar(50) NOT NULL,
+  `ecodEstatus` varchar(50) NOT NULL,
+  `ecodsubcategoria` varchar(50) NOT NULL,
+  `tMaterial` varchar(50) DEFAULT NULL,
+  `tModelo` varchar(20) DEFAULT NULL,
+  `tMarca` varchar(50) DEFAULT NULL,
+  `sGénero` set('Hombre','Mujer','','') DEFAULT NULL,
+  `sEdad` set('Niño','adolecente','Adulto','') DEFAULT NULL,
+  `Descripcion` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `catsubcategoria`
 --
 
@@ -2577,6 +2680,33 @@ CREATE TABLE `catsubcategoria` (
   `ecodsubcategoria` varchar(50) NOT NULL,
   `tNombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `catsubmenu`
+--
+
+CREATE TABLE `catsubmenu` (
+  `ecodSubmenu` varchar(250) NOT NULL,
+  `tNombre` varchar(50) NOT NULL,
+  `tUrl` varchar(100) NOT NULL,
+  `ecodCreacion` varchar(50) NOT NULL,
+  `fhCreacion` date NOT NULL,
+  `ecodEstatus` varchar(50) NOT NULL,
+  `ecodEdicion` varchar(50) DEFAULT NULL,
+  `fhEdicion` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `catsubmenu`
+--
+
+INSERT INTO `catsubmenu` (`ecodSubmenu`, `tNombre`, `tUrl`, `ecodCreacion`, `fhCreacion`, `ecodEstatus`, `ecodEdicion`, `fhEdicion`) VALUES
+('055e27ee-6c2c-4318-8a9e-01eb706b1f11', 'Controladores', '/catalogo/controllers', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-01', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL),
+('2cf33cfe-092d-4795-89d4-6101adadc706', 'Menu', '/catalogo/menu', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-01', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL),
+('710b0887-8372-4148-bf17-f169d762fcf3', 'Usuarios', '/catalogo/usuario', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-04', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL),
+('a3a5004f-6ce4-4575-a37c-fed4d5863e90', 'Sub Menu', '/catalogo/submenu', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-01', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2613,6 +2743,59 @@ CREATE TABLE `catusuarios` (
   `fhEliminacion` datetime DEFAULT NULL,
   `tMotivoEliminacion` varchar(250) DEFAULT NULL,
   `fhNacimiento` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logcatcotcontroller`
+--
+
+CREATE TABLE `logcatcotcontroller` (
+  `ecodControler` varchar(250) NOT NULL,
+  `tNombre` varchar(50) NOT NULL,
+  `turl` varchar(100) NOT NULL,
+  `ecodCreacion` varchar(50) NOT NULL,
+  `fhCreacion` date NOT NULL,
+  `ecodEstatus` varchar(50) NOT NULL,
+  `ecodEdicion` varchar(50) DEFAULT NULL,
+  `fhEdicion` datetime DEFAULT NULL,
+  `ecodEliminacion` varchar(50) DEFAULT NULL,
+  `fhEliminacion` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logcatmenu`
+--
+
+CREATE TABLE `logcatmenu` (
+  `ecodMenu` varchar(250) NOT NULL,
+  `tNombre` varchar(25) NOT NULL,
+  `Iconos` varchar(150) DEFAULT NULL,
+  `ecodCreacion` varchar(50) NOT NULL,
+  `fhCreacion` date NOT NULL,
+  `ecodEdicion` varchar(50) DEFAULT NULL,
+  `fhEdicion` datetime DEFAULT NULL,
+  `ecodEstatus` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logcatsubmenu`
+--
+
+CREATE TABLE `logcatsubmenu` (
+  `ecodSubmenu` varchar(250) NOT NULL,
+  `tNombre` varchar(50) NOT NULL,
+  `tUrl` varchar(100) NOT NULL,
+  `ecodCreacion` varchar(50) NOT NULL,
+  `fhCreacion` date NOT NULL,
+  `ecodEstatus` varchar(50) NOT NULL,
+  `ecodEdicion` varchar(50) DEFAULT NULL,
+  `fhEdicion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -5115,9 +5298,113 @@ INSERT INTO `relestadosmunicipios` (`ecodestadosmunicipios`, `ecodestados`, `eco
 (2456, 32, 2456),
 (2457, 32, 2457);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `relproductocolor`
+--
+
+CREATE TABLE `relproductocolor` (
+  `ecodrelProductoColor` varchar(50) NOT NULL,
+  `ecodProductos` varchar(50) NOT NULL,
+  `tcolor` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `relproductoimagen`
+--
+
+CREATE TABLE `relproductoimagen` (
+  `ecodRelProductoImagen` varchar(50) NOT NULL,
+  `iImagen` varchar(250) NOT NULL,
+  `ecodProductos` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `relproductostallas`
+--
+
+CREATE TABLE `relproductostallas` (
+  `ecodProTalla` varchar(50) NOT NULL,
+  `ecodProductos` varchar(50) NOT NULL,
+  `tTalla` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `relsalausuarioproductos`
+--
+
+CREATE TABLE `relsalausuarioproductos` (
+  `ecodrelSalaUsuarioProductos` varchar(50) NOT NULL,
+  `ecodProductos` varchar(50) NOT NULL,
+  `ecodUsuarioCliente` varchar(50) NOT NULL,
+  `ecodEstatus` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `relusuariomenusubmenucontroller`
+--
+
+CREATE TABLE `relusuariomenusubmenucontroller` (
+  `ecodRelusRarioMenuSubmenuController` varchar(250) NOT NULL,
+  `ecodMenu` varchar(250) NOT NULL,
+  `ecodSubmenu` varchar(250) NOT NULL,
+  `ecodController` varchar(250) DEFAULT NULL,
+  `ecodUsuario` varchar(250) NOT NULL,
+  `tToken` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `relusuariopreguntasproductos`
+--
+
+CREATE TABLE `relusuariopreguntasproductos` (
+  `eocdrelUsuarioPreguntasProductos` varchar(50) NOT NULL,
+  `ecodProductos` varchar(50) NOT NULL,
+  `ecodUsuarioCliente` varchar(50) NOT NULL,
+  `tPregunta` varchar(200) NOT NULL,
+  `tRespuesta` varchar(200) DEFAULT NULL,
+  `ecodUsuarioRespuesta` varchar(50) DEFAULT NULL,
+  `fhCreacion` date NOT NULL,
+  `fhRespuesta` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `bitmensajesala`
+--
+ALTER TABLE `bitmensajesala`
+  ADD PRIMARY KEY (`eocdBitMensajesSala`),
+  ADD KEY `ecodrelSalaUsuarioProductos` (`ecodrelSalaUsuarioProductos`),
+  ADD KEY `ecodUsuario` (`ecodUsuario`);
+
+--
+-- Indices de la tabla `catcategoria`
+--
+ALTER TABLE `catcategoria`
+  ADD PRIMARY KEY (`ecodCategoria`);
+
+--
+-- Indices de la tabla `catcotcontroller`
+--
+ALTER TABLE `catcotcontroller`
+  ADD PRIMARY KEY (`ecodControler`),
+  ADD KEY `ecodCreacion` (`ecodCreacion`),
+  ADD KEY `ecodEstatus` (`ecodEstatus`),
+  ADD KEY `ecodEliminacion` (`ecodEliminacion`);
 
 --
 -- Indices de la tabla `catestados`
@@ -5126,10 +5413,49 @@ ALTER TABLE `catestados`
   ADD PRIMARY KEY (`ecodEstado`);
 
 --
+-- Indices de la tabla `catestatus`
+--
+ALTER TABLE `catestatus`
+  ADD PRIMARY KEY (`ecodEstatus`);
+
+--
+-- Indices de la tabla `catmenu`
+--
+ALTER TABLE `catmenu`
+  ADD PRIMARY KEY (`ecodMenu`),
+  ADD KEY `ecodCreacion` (`ecodCreacion`),
+  ADD KEY `ecodEdicion` (`ecodEdicion`),
+  ADD KEY `ecodEstatus` (`ecodEstatus`);
+
+--
 -- Indices de la tabla `catmunicipios`
 --
 ALTER TABLE `catmunicipios`
   ADD PRIMARY KEY (`ecodMunicipio`);
+
+--
+-- Indices de la tabla `catproductos`
+--
+ALTER TABLE `catproductos`
+  ADD PRIMARY KEY (`ecodProductos`),
+  ADD KEY `ecodCategoria` (`ecodCategoria`),
+  ADD KEY `ecodEstatus` (`ecodEstatus`),
+  ADD KEY `ecodsubcategoria` (`ecodsubcategoria`);
+
+--
+-- Indices de la tabla `catsubcategoria`
+--
+ALTER TABLE `catsubcategoria`
+  ADD PRIMARY KEY (`ecodsubcategoria`);
+
+--
+-- Indices de la tabla `catsubmenu`
+--
+ALTER TABLE `catsubmenu`
+  ADD PRIMARY KEY (`ecodSubmenu`),
+  ADD KEY `ecodCreacion` (`ecodCreacion`),
+  ADD KEY `ecodEstatus` (`ecodEstatus`),
+  ADD KEY `ecodEdicion` (`ecodEdicion`);
 
 --
 -- Indices de la tabla `cattipousuario`
@@ -5141,7 +5467,12 @@ ALTER TABLE `cattipousuario`
 -- Indices de la tabla `catusuarios`
 --
 ALTER TABLE `catusuarios`
-  ADD PRIMARY KEY (`ecodUsuario`);
+  ADD PRIMARY KEY (`ecodUsuario`),
+  ADD KEY `ecotTipoUsaurio` (`ecotTipoUsaurio`),
+  ADD KEY `ecodEstatus` (`ecodEstatus`),
+  ADD KEY `ecodCreacion` (`ecodCreacion`),
+  ADD KEY `ecodEdicion` (`ecodEdicion`),
+  ADD KEY `ecodEliminacion` (`ecodEliminacion`);
 
 --
 -- Indices de la tabla `logcatusuario`
@@ -5153,7 +5484,144 @@ ALTER TABLE `logcatusuario`
 -- Indices de la tabla `relestadosmunicipios`
 --
 ALTER TABLE `relestadosmunicipios`
-  ADD PRIMARY KEY (`ecodestadosmunicipios`);
+  ADD PRIMARY KEY (`ecodestadosmunicipios`),
+  ADD KEY `ecodestados` (`ecodestados`),
+  ADD KEY `ecodmunicipios` (`ecodmunicipios`);
+
+--
+-- Indices de la tabla `relproductocolor`
+--
+ALTER TABLE `relproductocolor`
+  ADD PRIMARY KEY (`ecodrelProductoColor`),
+  ADD KEY `ecodProductos` (`ecodProductos`);
+
+--
+-- Indices de la tabla `relproductoimagen`
+--
+ALTER TABLE `relproductoimagen`
+  ADD PRIMARY KEY (`ecodRelProductoImagen`),
+  ADD KEY `ecodProductos` (`ecodProductos`);
+
+--
+-- Indices de la tabla `relproductostallas`
+--
+ALTER TABLE `relproductostallas`
+  ADD PRIMARY KEY (`ecodProTalla`),
+  ADD KEY `ecodProductos` (`ecodProductos`);
+
+--
+-- Indices de la tabla `relsalausuarioproductos`
+--
+ALTER TABLE `relsalausuarioproductos`
+  ADD PRIMARY KEY (`ecodrelSalaUsuarioProductos`),
+  ADD KEY `ecodProductos` (`ecodProductos`),
+  ADD KEY `ecodUsuarioCliente` (`ecodUsuarioCliente`),
+  ADD KEY `ecodEstatus` (`ecodEstatus`);
+
+--
+-- Indices de la tabla `relusuariomenusubmenucontroller`
+--
+ALTER TABLE `relusuariomenusubmenucontroller`
+  ADD PRIMARY KEY (`ecodRelusRarioMenuSubmenuController`),
+  ADD KEY `ecodMenu` (`ecodMenu`),
+  ADD KEY `ecodSubmenu` (`ecodSubmenu`),
+  ADD KEY `ecodController` (`ecodController`),
+  ADD KEY `ecodUsuario` (`ecodUsuario`);
+
+--
+-- Indices de la tabla `relusuariopreguntasproductos`
+--
+ALTER TABLE `relusuariopreguntasproductos`
+  ADD PRIMARY KEY (`eocdrelUsuarioPreguntasProductos`),
+  ADD KEY `ecodProductos` (`ecodProductos`),
+  ADD KEY `ecodUsuarioCliente` (`ecodUsuarioCliente`),
+  ADD KEY `ecodUsuarioRespuesta` (`ecodUsuarioRespuesta`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `bitmensajesala`
+--
+ALTER TABLE `bitmensajesala`
+  ADD CONSTRAINT `bitmensajesala_ibfk_1` FOREIGN KEY (`ecodrelSalaUsuarioProductos`) REFERENCES `relsalausuarioproductos` (`ecodrelSalaUsuarioProductos`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bitmensajesala_ibfk_2` FOREIGN KEY (`ecodUsuario`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catmenu`
+--
+ALTER TABLE `catmenu`
+  ADD CONSTRAINT `catmenu_ibfk_1` FOREIGN KEY (`ecodEdicion`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catmenu_ibfk_2` FOREIGN KEY (`ecodEstatus`) REFERENCES `catestatus` (`ecodEstatus`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catproductos`
+--
+ALTER TABLE `catproductos`
+  ADD CONSTRAINT `catproductos_ibfk_1` FOREIGN KEY (`ecodsubcategoria`) REFERENCES `catsubcategoria` (`ecodsubcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catproductos_ibfk_2` FOREIGN KEY (`ecodEstatus`) REFERENCES `catestatus` (`ecodEstatus`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catproductos_ibfk_3` FOREIGN KEY (`ecodCategoria`) REFERENCES `catcategoria` (`ecodCategoria`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catusuarios`
+--
+ALTER TABLE `catusuarios`
+  ADD CONSTRAINT `catusuarios_ibfk_1` FOREIGN KEY (`ecodCreacion`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catusuarios_ibfk_2` FOREIGN KEY (`ecodEliminacion`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catusuarios_ibfk_3` FOREIGN KEY (`ecodEdicion`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catusuarios_ibfk_4` FOREIGN KEY (`ecotTipoUsaurio`) REFERENCES `cattipousuario` (`ecodTipoUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catusuarios_ibfk_5` FOREIGN KEY (`ecodEstatus`) REFERENCES `catestatus` (`ecodEstatus`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `relestadosmunicipios`
+--
+ALTER TABLE `relestadosmunicipios`
+  ADD CONSTRAINT `relestadosmunicipios_ibfk_1` FOREIGN KEY (`ecodestados`) REFERENCES `catestados` (`ecodEstado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relestadosmunicipios_ibfk_2` FOREIGN KEY (`ecodmunicipios`) REFERENCES `catmunicipios` (`ecodMunicipio`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `relproductocolor`
+--
+ALTER TABLE `relproductocolor`
+  ADD CONSTRAINT `relproductocolor_ibfk_1` FOREIGN KEY (`ecodProductos`) REFERENCES `catproductos` (`ecodProductos`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `relproductoimagen`
+--
+ALTER TABLE `relproductoimagen`
+  ADD CONSTRAINT `relproductoimagen_ibfk_1` FOREIGN KEY (`ecodProductos`) REFERENCES `catproductos` (`ecodProductos`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `relproductostallas`
+--
+ALTER TABLE `relproductostallas`
+  ADD CONSTRAINT `relproductostallas_ibfk_1` FOREIGN KEY (`ecodProductos`) REFERENCES `catproductos` (`ecodProductos`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `relsalausuarioproductos`
+--
+ALTER TABLE `relsalausuarioproductos`
+  ADD CONSTRAINT `relsalausuarioproductos_ibfk_1` FOREIGN KEY (`ecodProductos`) REFERENCES `catproductos` (`ecodProductos`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relsalausuarioproductos_ibfk_2` FOREIGN KEY (`ecodUsuarioCliente`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relsalausuarioproductos_ibfk_3` FOREIGN KEY (`ecodEstatus`) REFERENCES `catestatus` (`ecodEstatus`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `relusuariomenusubmenucontroller`
+--
+ALTER TABLE `relusuariomenusubmenucontroller`
+  ADD CONSTRAINT `relusuariomenusubmenucontroller_ibfk_1` FOREIGN KEY (`ecodMenu`) REFERENCES `catmenu` (`ecodMenu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relusuariomenusubmenucontroller_ibfk_2` FOREIGN KEY (`ecodSubmenu`) REFERENCES `catsubmenu` (`ecodSubmenu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relusuariomenusubmenucontroller_ibfk_3` FOREIGN KEY (`ecodUsuario`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relusuariomenusubmenucontroller_ibfk_4` FOREIGN KEY (`ecodController`) REFERENCES `catcotcontroller` (`ecodControler`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `relusuariopreguntasproductos`
+--
+ALTER TABLE `relusuariopreguntasproductos`
+  ADD CONSTRAINT `relusuariopreguntasproductos_ibfk_1` FOREIGN KEY (`ecodProductos`) REFERENCES `catproductos` (`ecodProductos`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relusuariopreguntasproductos_ibfk_2` FOREIGN KEY (`ecodUsuarioCliente`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relusuariopreguntasproductos_ibfk_3` FOREIGN KEY (`ecodUsuarioRespuesta`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

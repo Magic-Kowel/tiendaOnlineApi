@@ -2,6 +2,8 @@ import { pool } from "../../db.js";
 import bcrypt from "bcryptjs";
 import { uid } from 'uid';
 import { sendEmail } from "../../libs/sendEmail.js";
+import { STATUS_USER_PROCESS,TYPE_USER_CLIENT } from "../../config.js";
+import logger from "../../libs/logger.js";
 export const createUser = async (req,res)=>{
   try {
       const {
@@ -38,8 +40,8 @@ export const createUser = async (req,res)=>{
           lastName,
           email,
           passwordEncript,
-          "cliente",
-          "",
+          TYPE_USER_CLIENT,
+          STATUS_USER_PROCESS,
           birthDate
       ]);
       const emailObject={
@@ -53,6 +55,7 @@ export const createUser = async (req,res)=>{
         message:"Created with success"
       });
   } catch (error) {
+      logger.error(error);
       return res.status(500).json({
           message: error
       });
