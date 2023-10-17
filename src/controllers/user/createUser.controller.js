@@ -4,6 +4,7 @@ import { uid } from 'uid';
 import { sendEmail } from "../../libs/sendEmail.js";
 import { STATUS_USER_PROCESS,TYPE_USER_CLIENT } from "../../config.js";
 import logger from "../../libs/logger.js";
+import { BASE_URL_FRONT } from "../../config.js";
 export const createUser = async (req,res)=>{
   try {
       const {
@@ -47,7 +48,7 @@ export const createUser = async (req,res)=>{
       const emailObject={
         email:email,
         subject:'Verificación de correo electrónico',
-        message:`Haga clic en el enlace siguiente para verificar su dirección de correo: http://localhost:5173/user/validate/${uidUser}`
+        message:`Haga clic en el enlace siguiente para verificar su dirección de correo: ${BASE_URL_FRONT}/user/validate/${uidUser}`
       }
       sendEmail(emailObject);
       res.status(200).json({

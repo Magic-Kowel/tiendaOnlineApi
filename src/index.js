@@ -5,13 +5,15 @@ import { PORT } from './config.js';
 
 // routes
 
-import usersRoutes from "./routes/user.routes.js"
+import usersRoutes from "./routes/user.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
 const app = express();
 app.use(cors());
 app.use(morgan('short'));
 app.use(express.json());
 //apis
 app.use('/api',usersRoutes);
+app.use('/api',categoryRoutes);
 // imagenes
  
 app.use((req,res, next) =>{

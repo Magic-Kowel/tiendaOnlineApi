@@ -22,3 +22,20 @@ content-type:application/json
 {
     "uid":"2660376e-dbf8-44c1-b69f-b2554e3e5d4c"
 }
+###
+POST {{api}}/login
+content-type:application/json
+
+{
+    "password":"123456",
+    "email":"yioootakucosplay@gmail.com"
+}
+###
+
+###
+POST {{api}}/user/menu
+content-type:application/json
+
+{
+    "idUser":"b31e1fde35d839a5277c40dce048ebf7"
+}

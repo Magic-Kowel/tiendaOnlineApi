@@ -20,3 +20,4 @@ export const STATUS_USER_FINISHED = process.env.STATUS_USER_FINISHED || "93a484c
 export const STATUS_USER_DELETE = process.env.STATUS_USER_DELETE || "fa6cc9a2-f221-4e27-b575-1fac2698d27a";
 
 export const TYPE_USER_CLIENT = process.env.TYPE_USER_CLIENT || '1';
+export const BASE_URL_FRONT = "http://localhost:5173";
