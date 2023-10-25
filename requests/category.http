@@ -1,8 +1,25 @@
 @api=  http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1YTQwY2M4NDYzOTljYjI3NmFiM2M5MTQ0NjYxMmQwIiwidHlwZVVzZXIiOiJhZG1pbiIsImlhdCI6MTY5ODAwNjg2NiwiZXhwIjoxNjk4NjExNjY2fQ.zKehUeqePnunFnWaicdXT5fSCKSMaiDYu8yAlXDl3CY
 
+GET {{api}}/category/5f2597a474c7207a5c306d08a41f9a52
+###
+GET {{api}}/categories
+###
 POST {{api}}/category
 content-type:application/json
+x-access-token: {{token}}
+{
+    "name":"prueba12"
+}
+###
+PATCH {{api}}/category
+content-type:application/json
+x-access-token: {{token}}
 
 {
-    "name":"prueba"
+    "id":"5f2597a474c7207a5c306d08a41f9a52",
+    "name":"ddd"
 }
+###
+DELETE {{api}}/category/49b5f2597a474c7207a5c306d08a41f9
+x-access-token: {{token}}

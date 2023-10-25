@@ -8,6 +8,6 @@ export const getUsers = async(req,res) =>{
     logger.error(error);
       return res.status(500).json({
           message: 'Something goes wrong'
-      })
+      });
   }
 }

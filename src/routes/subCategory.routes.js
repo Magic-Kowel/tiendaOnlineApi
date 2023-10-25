@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { getSubCategories } from "../controllers/subcategory/getSubCategories.controller.js";
+import { createSubCategory } from "../controllers/subcategory/createSubCategory.controller.js";
+import { deleteSubcategory } from "../controllers/subcategory/deleteSubcategory.controller.js";
+import { getSubcategory } from "../controllers/subcategory/getSubcategory.controller.js";
+import { updateSubcategory } from "../controllers/subcategory/updateSubcategory.controller.js";
+import verifyToken from "../libs/verifyToken.js";
+const router = Router();
+router.get("/subcategories/:idCategory",getSubCategories);
+router.get("/subcategory/:idSubcategory",getSubcategory);
+router.post("/subcategory",verifyToken,createSubCategory);
+router.delete("/subcategory/:idSubcategory",verifyToken,deleteSubcategory);
+router.patch("/subcategory",verifyToken,updateSubcategory);
+export default router;

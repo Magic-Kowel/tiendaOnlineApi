@@ -10,7 +10,7 @@ export const createCategory = async (req,res) =>{
         return res.status(200).json({
             created:true,
             message:"Created with success"
-        })
+        });
     } catch (error) {
         logger.error(error);
         return res.status(500).json({

@@ -1,7 +1,7 @@
 @api=  http://localhost:3000/api
 GET  {{api}}/user
 ###
-GET  {{api}}/user/c36380e0fb8d273f7f5ea74b55970214
+GET  {{api}}/user/55a40cc846399cb276ab3c91446612d0
 ###
 GET  {{api}}/user/email/a20170094@utem.edu.mx
 #### 

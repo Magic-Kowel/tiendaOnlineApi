@@ -1,0 +1,27 @@
+@api=  http://localhost:3000/api
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1YTQwY2M4NDYzOTljYjI3NmFiM2M5MTQ0NjYxMmQwIiwidHlwZVVzZXIiOiJhZG1pbiIsImlhdCI6MTY5ODExNTQ4NywiZXhwIjoxNjk4NzIwMjg3fQ.F9_chgXSLJmBM2AKzHdQL2eUhMlmhmoFDaJoH2kB-Ws
+
+GET {{api}}/subcategories/5f2597a474c7207a5c306d08a41f9a52
+###
+GET {{api}}/subcategory/502770a9d2719622c8ed4aad9c07c803
+###
+POST {{api}}/subcategory
+content-type:application/json
+x-access-token: {{token}}
+
+{
+    "name":"pijamas",
+    "idCategory":"5f2597a474c7207a5c306d08a41f9a52"
+}
+###
+PATCH  {{api}}/subcategory
+content-type:application/json
+x-access-token: {{token}}
+
+{
+    "name":"ttt",
+    "id":"502770a9d2719622c8ed4aad9c07c803"
+}
+###
+DELETE {{api}}/subcategory/dbf4faab6eb4cfaf479470af6b7f5938
+ x-access-token: {{token}}
