@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { getSizes } from "../controllers/size/getSizes.controller.js";
+import { getSize } from "../controllers/size/getSize.controller.js";
+import { createSize } from "../controllers/size/createSize.controller.js";
+import { deleteSize } from "../controllers/size/deleteSize.controller.js";
+import { updateSize } from "../controllers/size/updateSize.controller.js";
+import verifyToken from "../libs/verifyToken.js";
+const router = Router();
+router.get("/sizes",verifyToken,getSizes);
+router.get("/size/:idSize",verifyToken,getSize);
+router.post("/size",verifyToken,createSize);
+router.delete("/size/:idSize",deleteSize);
+router.patch("/size",updateSize);
+export default router;

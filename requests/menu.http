@@ -1,0 +1,35 @@
+@api=  http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1YTQwY2M4NDYzOTljYjI3NmFiM2M5MTQ0NjYxMmQwIiwidHlwZVVzZXIiOiJhZG1pbiIsImlhdCI6MTY5OTAyNDQ5MCwiZXhwIjoxNjk5NjI5MjkwfQ.94JXah1sIqzFz6gkuViEKugiqhyuOXE5iz7zSRyxOhg
+
+GET {{api}}/status
+x-access-token: {{token}}
+###
+
+POST {{api}}/menu
+x-access-token: {{token}}
+content-type:application/json
+
+{
+    "name":"menu1",
+    "idUser":"55a40cc846399cb276ab3c91446612d0",
+    "status":"2660376e-dbf8-44c1-b69f-b2554e3e5d4c"
+}
+###
+GET {{api}}/menus
+x-access-token: {{token}}
+###
+GET {{api}}/menus/active
+x-access-token: {{token}}
+###
+GET {{api}}/menu/17c34f1f02861f2737633271c0dc49e5
+x-access-token: {{token}}
+###
+PATCH {{api}}/menu
+x-access-token: {{token}}
+content-type:application/json
+
+{
+    "name":"hola",
+    "idStatus":"93a484c5-ce42-435e-98ac-12bc215d95b5",
+    "idMenu":"17c34f1f02861f2737633271c0dc49e5"
+}

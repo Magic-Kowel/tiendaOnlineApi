@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2023 a las 21:35:47
+-- Tiempo de generación: 12-11-2023 a las 03:59:58
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -43,8 +43,34 @@ CREATE TABLE `bitmensajesala` (
 
 CREATE TABLE `catcategoria` (
   `ecodCategoria` varchar(50) NOT NULL,
-  `tNombre` varchar(30) NOT NULL
+  `tNombre` varchar(30) NOT NULL,
+  `activo` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `catcategoria`
+--
+
+INSERT INTO `catcategoria` (`ecodCategoria`, `tNombre`, `activo`) VALUES
+('2597a474c7207a5c306d08a41f9a5258', 'prueba7', 0),
+('449b5f2597a474c7207a5c306d08a41f', 'prueba1', 0),
+('474c7207a5c306d08a41f9a525868d4e', 'prueba12', 0),
+('49b5f2597a474c7207a5c306d08a41f9', 'prueba2', 0),
+('4be5e307aef442f31bad71d5ac9506b6', 'hola', 0),
+('58188bc8698be8be3fb365a9a0315e47', '', 0),
+('597a474c7207a5c306d08a41f9a52586', 'prueba8', 0),
+('5f2597a474c7207a5c306d08a41f9a52', 'ddd', 1),
+('68e8943086a6a98ea85df6533b5c41fb', 'ropa', 1),
+('7a474c7207a5c306d08a41f9a525868d', 'prueba10', 1),
+('97a474c7207a5c306d08a41f9a525868', 'prueba9', 1),
+('9b5f2597a474c7207a5c306d08a41f9a', 'prueba3', 1),
+('a1bcf9a24d135bea4d3922781022a841', 'hola', 0),
+('a474c7207a5c306d08a41f9a525868d4', 'prueba11', 1),
+('b5f2597a474c7207a5c306d08a41f9a5', 'prueba4', 1),
+('be5e307aef442f31bad71d5ac9506b6b', 'como estas', 1),
+('e17b5cd753889e68ff4af2231adbb7ea', 'prueba', 1),
+('ec4186cbc37a9ab9c6b96d84770adf78', 'asd', 0),
+('f2597a474c7207a5c306d08a41f9a525', 'prueba6', 1);
 
 -- --------------------------------------------------------
 
@@ -157,20 +183,28 @@ CREATE TABLE `catmenu` (
   `ecodMenu` varchar(250) NOT NULL,
   `tNombre` varchar(25) NOT NULL,
   `Iconos` varchar(150) DEFAULT NULL,
-  `ecodCreacion` varchar(50) NOT NULL,
-  `fhCreacion` date NOT NULL,
+  `fhCreacion` date NOT NULL DEFAULT current_timestamp(),
   `ecodEdicion` varchar(50) DEFAULT NULL,
   `fhEdicion` datetime DEFAULT NULL,
-  `ecodEstatus` varchar(50) NOT NULL
+  `ecodEstatus` varchar(50) NOT NULL,
+  `ecodCreacion` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `catmenu`
 --
 
-INSERT INTO `catmenu` (`ecodMenu`, `tNombre`, `Iconos`, `ecodCreacion`, `fhCreacion`, `ecodEdicion`, `fhEdicion`, `ecodEstatus`) VALUES
-('30e33d73-c153-465d-bc2d-059c3c068205', 'Sistemas', '', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-08-24', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c'),
-('9bd00aa8-7232-44dc-bcb7-f209d503e391', 'Catalogo', 'fa fa-user  fa-2x', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-08-24', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c');
+INSERT INTO `catmenu` (`ecodMenu`, `tNombre`, `Iconos`, `fhCreacion`, `ecodEdicion`, `fhEdicion`, `ecodEstatus`, `ecodCreacion`) VALUES
+('17c34f1f02861f2737633271c0dc49e5', 'hola', NULL, '2023-10-27', NULL, '2023-10-30 05:50:08', '93a484c5-ce42-435e-98ac-12bc215d95b5', '55a40cc846399cb276ab3c91446612d0'),
+('30e33d73-c153-465d-bc2d-059c3c068205', 'Sistemas', '', '2023-08-24', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL),
+('589c66579b26e9f95af082c8e7d44a33', 'categorias', NULL, '2023-10-27', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '55a40cc846399cb276ab3c91446612d0'),
+('58dbbff1587394b2e8a8dd51c4862879', 'menu1', NULL, '2023-10-26', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '55a40cc846399cb276ab3c91446612d0'),
+('7c34f1f02861f2737633271c0dc49e59', 'd', NULL, '2023-10-27', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '55a40cc846399cb276ab3c91446612d0'),
+('89c66579b26e9f95af082c8e7d44a335', '122', NULL, '2023-10-27', NULL, NULL, '01ae3cd3-144c-46a3-99aa-bb9174761b37', '55a40cc846399cb276ab3c91446612d0'),
+('9589c66579b26e9f95af082c8e7d44a3', 'hola', NULL, '2023-10-27', NULL, NULL, '01ae3cd3-144c-46a3-99aa-bb9174761b37', '55a40cc846399cb276ab3c91446612d0'),
+('9bd00aa8-7232-44dc-bcb7-f209d503e391', 'Catalogo', 'fa fa-user  fa-2x', '2023-08-24', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL),
+('9c66579b26e9f95af082c8e7d44a335b', 'xxx', NULL, '2023-10-27', NULL, NULL, '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '55a40cc846399cb276ab3c91446612d0'),
+('c34f1f02861f2737633271c0dc49e591', 'd', NULL, '2023-10-27', NULL, NULL, '01ae3cd3-144c-46a3-99aa-bb9174761b37', '55a40cc846399cb276ab3c91446612d0');
 
 -- --------------------------------------------------------
 
@@ -2661,7 +2695,6 @@ CREATE TABLE `catproductos` (
   `nStock` int(11) NOT NULL,
   `ecodCategoria` varchar(50) NOT NULL,
   `ecodEstatus` varchar(50) NOT NULL,
-  `ecodsubcategoria` varchar(50) NOT NULL,
   `tMaterial` varchar(50) DEFAULT NULL,
   `tModelo` varchar(20) DEFAULT NULL,
   `tMarca` varchar(50) DEFAULT NULL,
@@ -2678,8 +2711,27 @@ CREATE TABLE `catproductos` (
 
 CREATE TABLE `catsubcategoria` (
   `ecodsubcategoria` varchar(50) NOT NULL,
-  `tNombre` varchar(30) NOT NULL
+  `tNombre` varchar(30) NOT NULL,
+  `ecodCategoria` varchar(100) DEFAULT NULL,
+  `activo` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `catsubcategoria`
+--
+
+INSERT INTO `catsubcategoria` (`ecodsubcategoria`, `tNombre`, `ecodCategoria`, `activo`) VALUES
+('02770a9d2719622c8ed4aad9c07c8033', 'pijamas', '5f2597a474c7207a5c306d08a41f9a52', 0),
+('0a9d2719622c8ed4aad9c07c8033e6ab', 'asd', '5f2597a474c7207a5c306d08a41f9a52', 0),
+('19622c8ed4aad9c07c8033e6abd1a81b', '1', '5f2597a474c7207a5c306d08a41f9a52', 0),
+('253beb5be2a674fe944b3305f45d8c9c', 'pijamas', '5f2597a474c7207a5c306d08a41f9a52', 1),
+('502770a9d2719622c8ed4aad9c07c803', 'zt', '5f2597a474c7207a5c306d08a41f9a52', 1),
+('770a9d2719622c8ed4aad9c07c8033e6', 'hola', '5f2597a474c7207a5c306d08a41f9a52', 0),
+('90068b00dff8d2f43c8a7b84041678a8', 'mamelucos', '5f2597a474c7207a5c306d08a41f9a52', 1),
+('9d2719622c8ed4aad9c07c8033e6abd1', 'zzz', '5f2597a474c7207a5c306d08a41f9a52', 0),
+('a502770a9d2719622c8ed4aad9c07c80', 'pijamas', '5f2597a474c7207a5c306d08a41f9a52', 1),
+('c66579b26e9f95af082c8e7d44a335ba', 'pijamas', '68e8943086a6a98ea85df6533b5c41fb', 1),
+('dbf4faab6eb4cfaf479470af6b7f5938', 'pijamas', '5f2597a474c7207a5c306d08a41f9a52', 0);
 
 -- --------------------------------------------------------
 
@@ -2691,22 +2743,24 @@ CREATE TABLE `catsubmenu` (
   `ecodSubmenu` varchar(250) NOT NULL,
   `tNombre` varchar(50) NOT NULL,
   `tUrl` varchar(100) NOT NULL,
-  `ecodCreacion` varchar(50) NOT NULL,
-  `fhCreacion` date NOT NULL,
+  `fhCreacion` date NOT NULL DEFAULT current_timestamp(),
   `ecodEstatus` varchar(50) NOT NULL,
   `ecodEdicion` varchar(50) DEFAULT NULL,
-  `fhEdicion` datetime DEFAULT NULL
+  `fhEdicion` datetime DEFAULT NULL,
+  `ecodCreacion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `catsubmenu`
 --
 
-INSERT INTO `catsubmenu` (`ecodSubmenu`, `tNombre`, `tUrl`, `ecodCreacion`, `fhCreacion`, `ecodEstatus`, `ecodEdicion`, `fhEdicion`) VALUES
-('055e27ee-6c2c-4318-8a9e-01eb706b1f11', 'Controladores', '/catalogo/controllers', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-01', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL),
-('2cf33cfe-092d-4795-89d4-6101adadc706', 'Menu', '/catalogo/menu', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-01', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL),
-('710b0887-8372-4148-bf17-f169d762fcf3', 'Usuarios', '/catalogo/usuario', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-04', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL),
-('a3a5004f-6ce4-4575-a37c-fed4d5863e90', 'Sub Menu', '/catalogo/submenu', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', '2023-09-01', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL);
+INSERT INTO `catsubmenu` (`ecodSubmenu`, `tNombre`, `tUrl`, `fhCreacion`, `ecodEstatus`, `ecodEdicion`, `fhEdicion`, `ecodCreacion`) VALUES
+('055e27ee-6c2c-4318-8a9e-01eb706b1f11', 'Controladores 2', '/catalogo/controllers/3', '2023-09-01', 'fa6cc9a2-f221-4e27-b575-1fac2698d27a', NULL, '2023-11-03 07:27:25', ''),
+('2cf33cfe-092d-4795-89d4-6101adadc706', 'Menu', '/catalogo/menu', '2023-09-01', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL, ''),
+('36ff49c2856f0c8ee2891620f3ef0a9b', '1', '1', '2023-11-02', '01ae3cd3-144c-46a3-99aa-bb9174761b37', NULL, NULL, '55a40cc846399cb276ab3c91446612d0'),
+('5f9cc851fb7d0de5f4c2b4f03b5853c4', 'submenu', 'hola', '2023-11-02', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL, '55a40cc846399cb276ab3c91446612d0'),
+('710b0887-8372-4148-bf17-f169d762fcf3', 'Usuarios', '/catalogo/usuario', '2023-09-04', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL, ''),
+('a3a5004f-6ce4-4575-a37c-fed4d5863e90', 'Sub Menu', '/catalogo/submenu', '2023-09-01', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -2720,6 +2774,13 @@ CREATE TABLE `cattipousuario` (
   `tDescripcion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `cattipousuario`
+--
+
+INSERT INTO `cattipousuario` (`ecodTipoUsuario`, `tNombre`, `tDescripcion`) VALUES
+('1', 'admin', 'Administrador del sistema');
+
 -- --------------------------------------------------------
 
 --
@@ -2731,9 +2792,9 @@ CREATE TABLE `catusuarios` (
   `tNombre` varchar(30) NOT NULL,
   `tApellido` varchar(30) NOT NULL,
   `tCorreo` varchar(30) NOT NULL,
-  `tPassword` varchar(30) NOT NULL,
+  `tPassword` varchar(100) NOT NULL,
   `tToken` varchar(250) DEFAULT NULL,
-  `fhCreacion` datetime NOT NULL,
+  `fhCreacion` datetime NOT NULL DEFAULT current_timestamp(),
   `ecotTipoUsaurio` varchar(50) NOT NULL,
   `ecodEstatus` varchar(50) NOT NULL,
   `ecodCreacion` varchar(50) DEFAULT NULL,
@@ -2744,6 +2805,13 @@ CREATE TABLE `catusuarios` (
   `tMotivoEliminacion` varchar(250) DEFAULT NULL,
   `fhNacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `catusuarios`
+--
+
+INSERT INTO `catusuarios` (`ecodUsuario`, `tNombre`, `tApellido`, `tCorreo`, `tPassword`, `tToken`, `fhCreacion`, `ecotTipoUsaurio`, `ecodEstatus`, `ecodCreacion`, `ecodEdicion`, `fhEdicion`, `ecodEliminacion`, `fhEliminacion`, `tMotivoEliminacion`, `fhNacimiento`) VALUES
+('55a40cc846399cb276ab3c91446612d0', 'josuemagico', 'fierro', 'yioootakucosplay@gmail.com', '$2a$10$14tZp01/KvM6ljNBihPOYOc11INQo7KAjGBAxBrMPQPGzfSev2H.a', NULL, '2023-10-14 19:03:45', '1', '2660376e-dbf8-44c1-b69f-b2554e3e5d4c', NULL, NULL, NULL, NULL, NULL, NULL, '2023-10-14');
 
 -- --------------------------------------------------------
 
@@ -5359,8 +5427,18 @@ CREATE TABLE `relusuariomenusubmenucontroller` (
   `ecodSubmenu` varchar(250) NOT NULL,
   `ecodController` varchar(250) DEFAULT NULL,
   `ecodUsuario` varchar(250) NOT NULL,
-  `tToken` varchar(250) NOT NULL
+  `tToken` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `relusuariomenusubmenucontroller`
+--
+
+INSERT INTO `relusuariomenusubmenucontroller` (`ecodRelusRarioMenuSubmenuController`, `ecodMenu`, `ecodSubmenu`, `ecodController`, `ecodUsuario`, `tToken`) VALUES
+('56d1de9e7c7740fe8eeec66372c9a14b', '9c66579b26e9f95af082c8e7d44a335b', '710b0887-8372-4148-bf17-f169d762fcf3', NULL, '55a40cc846399cb276ab3c91446612d0', NULL),
+('6d1de9e7c7740fe8eeec66372c9a14b4', '30e33d73-c153-465d-bc2d-059c3c068205', '710b0887-8372-4148-bf17-f169d762fcf3', NULL, '55a40cc846399cb276ab3c91446612d0', NULL),
+('d1de9e7c7740fe8eeec66372c9a14b4e', '30e33d73-c153-465d-bc2d-059c3c068205', '2cf33cfe-092d-4795-89d4-6101adadc706', NULL, '55a40cc846399cb276ab3c91446612d0', NULL),
+('dd8788ca0c5d3a1d092609d6cb1d3ba4', '9c66579b26e9f95af082c8e7d44a335b', '710b0887-8372-4148-bf17-f169d762fcf3', NULL, '55a40cc846399cb276ab3c91446612d0', NULL);
 
 -- --------------------------------------------------------
 
@@ -5423,9 +5501,9 @@ ALTER TABLE `catestatus`
 --
 ALTER TABLE `catmenu`
   ADD PRIMARY KEY (`ecodMenu`),
-  ADD KEY `ecodCreacion` (`ecodCreacion`),
   ADD KEY `ecodEdicion` (`ecodEdicion`),
-  ADD KEY `ecodEstatus` (`ecodEstatus`);
+  ADD KEY `ecodEstatus` (`ecodEstatus`),
+  ADD KEY `ecodCreacion` (`ecodCreacion`);
 
 --
 -- Indices de la tabla `catmunicipios`
@@ -5439,23 +5517,23 @@ ALTER TABLE `catmunicipios`
 ALTER TABLE `catproductos`
   ADD PRIMARY KEY (`ecodProductos`),
   ADD KEY `ecodCategoria` (`ecodCategoria`),
-  ADD KEY `ecodEstatus` (`ecodEstatus`),
-  ADD KEY `ecodsubcategoria` (`ecodsubcategoria`);
+  ADD KEY `ecodEstatus` (`ecodEstatus`);
 
 --
 -- Indices de la tabla `catsubcategoria`
 --
 ALTER TABLE `catsubcategoria`
-  ADD PRIMARY KEY (`ecodsubcategoria`);
+  ADD PRIMARY KEY (`ecodsubcategoria`),
+  ADD KEY `ecodCategoria` (`ecodCategoria`);
 
 --
 -- Indices de la tabla `catsubmenu`
 --
 ALTER TABLE `catsubmenu`
   ADD PRIMARY KEY (`ecodSubmenu`),
-  ADD KEY `ecodCreacion` (`ecodCreacion`),
   ADD KEY `ecodEstatus` (`ecodEstatus`),
-  ADD KEY `ecodEdicion` (`ecodEdicion`);
+  ADD KEY `ecodEdicion` (`ecodEdicion`),
+  ADD KEY `ecodCreacion` (`ecodCreacion`);
 
 --
 -- Indices de la tabla `cattipousuario`
@@ -5553,15 +5631,28 @@ ALTER TABLE `bitmensajesala`
 --
 ALTER TABLE `catmenu`
   ADD CONSTRAINT `catmenu_ibfk_1` FOREIGN KEY (`ecodEdicion`) REFERENCES `catusuarios` (`ecodUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `catmenu_ibfk_2` FOREIGN KEY (`ecodEstatus`) REFERENCES `catestatus` (`ecodEstatus`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `catmenu_ibfk_2` FOREIGN KEY (`ecodEstatus`) REFERENCES `catestatus` (`ecodEstatus`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catmenu_ibfk_3` FOREIGN KEY (`ecodCreacion`) REFERENCES `catusuarios` (`ecodUsuario`);
 
 --
 -- Filtros para la tabla `catproductos`
 --
 ALTER TABLE `catproductos`
-  ADD CONSTRAINT `catproductos_ibfk_1` FOREIGN KEY (`ecodsubcategoria`) REFERENCES `catsubcategoria` (`ecodsubcategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `catproductos_ibfk_2` FOREIGN KEY (`ecodEstatus`) REFERENCES `catestatus` (`ecodEstatus`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `catproductos_ibfk_3` FOREIGN KEY (`ecodCategoria`) REFERENCES `catcategoria` (`ecodCategoria`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catsubcategoria`
+--
+ALTER TABLE `catsubcategoria`
+  ADD CONSTRAINT `catsubcategoria_ibfk_1` FOREIGN KEY (`ecodCategoria`) REFERENCES `catcategoria` (`ecodCategoria`);
+
+--
+-- Filtros para la tabla `catsubmenu`
+--
+ALTER TABLE `catsubmenu`
+  ADD CONSTRAINT `catsubmenu_ibfk_1` FOREIGN KEY (`ecodCreacion`) REFERENCES `catusuarios` (`ecodUsuario`),
+  ADD CONSTRAINT `catsubmenu_ibfk_2` FOREIGN KEY (`ecodEstatus`) REFERENCES `catestatus` (`ecodEstatus`);
 
 --
 -- Filtros para la tabla `catusuarios`

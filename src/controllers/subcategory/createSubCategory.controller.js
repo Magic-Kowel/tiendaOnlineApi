@@ -5,7 +5,6 @@ export const createSubCategory = async (req,res) =>{
     try {
         const uidUser = uid(32);
         const {name,idCategory} = req.body;
-        console.log(req.body);
         const [row] = await pool.query(`insert into catsubcategoria (ecodsubcategoria,tNombre,ecodCategoria)
             values(?,?,?)
         `,[

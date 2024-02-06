@@ -1,0 +1,29 @@
+@api=  http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1YTQwY2M4NDYzOTljYjI3NmFiM2M5MTQ0NjYxMmQwIiwidHlwZVVzZXIiOiJhZG1pbiIsImlhdCI6MTY5ODAwNjg2NiwiZXhwIjoxNjk4NjExNjY2fQ.zKehUeqePnunFnWaicdXT5fSCKSMaiDYu8yAlXDl3CY
+
+GET {{api}}/sizes
+###
+POST {{api}}/size
+content-type:application/json
+x-access-token: {{token}}
+
+{
+    "nameSize":"xx",
+    "width":20,
+    "high":20,
+    "idStatus":"2660376e-dbf8-44c1-b69f-b2554e3e5d4c"
+}
+###
+DELETE {{api}}/size/6de8c42571c14dc9aa962b594f35819c
+x-access-token: {{token}}
+###
+PATCH {{api}}/size
+content-type:application/json
+x-access-token: {{token}}
+
+{
+    "nameSize":"hola",
+    "width":33,
+    "high":33,
+    "idSize":"6de8c42571c14dc9aa962b594f35819c"
+}

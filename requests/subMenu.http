@@ -1,0 +1,34 @@
+@api=  http://localhost:3000/api
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1YTQwY2M4NDYzOTljYjI3NmFiM2M5MTQ0NjYxMmQwIiwidHlwZVVzZXIiOiJhZG1pbiIsImlhdCI6MTY5ODg4MzYyMywiZXhwIjoxNjk5NDg4NDIzfQ.aPLlh3DrgYFkS-pKV9y7yIvM0IlPEcp3y5SXYMdclSE
+
+GET {{api}}/submenus
+x-access-token: {{token}}
+###
+GET {{api}}/submenus/active
+x-access-token: {{token}}
+###
+GET {{api}}/submenu/055e27ee-6c2c-4318-8a9e-01eb706b1f11
+x-access-token: {{token}}
+###
+
+POST {{api}}/submenu
+x-access-token: {{token}}
+content-type:application/json
+
+{
+    "name":"submenu",
+    "url":"hola",
+    "idUser":"55a40cc846399cb276ab3c91446612d0",
+    "status":"2660376e-dbf8-44c1-b69f-b2554e3e5d4c"
+}
+###
+PATCH  {{api}}/submenu
+x-access-token: {{token}}
+content-type:application/json
+
+{
+    "idSubMenu": "055e27ee-6c2c-4318-8a9e-01eb706b1f11",
+    "name": "Controladores 1",
+    "url": "/catalogo/controllers/1",
+    "status": "93a484c5-ce42-435e-98ac-12bc215d95b5"
+}

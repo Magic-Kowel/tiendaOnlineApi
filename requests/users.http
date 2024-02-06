@@ -1,5 +1,5 @@
 @api=  http://localhost:3000/api
-GET  {{api}}/user
+GET  {{api}}/users
 ###
 GET  {{api}}/user/55a40cc846399cb276ab3c91446612d0
 ###
@@ -30,8 +30,6 @@ content-type:application/json
     "password":"123456",
     "email":"yioootakucosplay@gmail.com"
 }
-###
-
 ###
 POST {{api}}/user/menu
 content-type:application/json
