@@ -1,0 +1,35 @@
+@api=  http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1YTQwY2M4NDYzOTljYjI3NmFiM2M5MTQ0NjYxMmQwIiwidHlwZVVzZXIiOiJhZG1pbiIsImlhdCI6MTcwNzE3OTUyOSwiZXhwIjoxNzA3Nzg0MzI5fQ.MRnxPmw2CTk81IcqJiYg4l2OaiazD3sZfHSSSbYM2E4
+
+
+GET {{api}}/sizes/variation
+x-access-token: {{token}}
+###
+GET {{api}}/size/variation/15dd75e17d66053b0d0c9c68f2ca12bd
+x-access-token: {{token}}
+###
+POST {{api}}/size/variation
+content-type:application/json
+x-access-token: {{token}}
+
+{
+    "idSize":"9abf363cd36e6680f07cf736e0279cfe",
+    "idAgeGroup":"9a4a20bb-85f3-4432-b171-8d0352e668f4",
+    "minAge":"",
+    "maxAge":""
+}
+###
+DELETE {{api}}/size/variation/15dd75e17d66053b0d0c9c68f2ca12bd
+x-access-token: {{token}}
+###
+PATCH {{api}}/size/variation
+content-type:application/json
+x-access-token: {{token}}
+
+{
+    "idSize":"9abf363cd36e6680f07cf736e0279cfe",
+    "idAgeGroup":"9a4a20bb-85f3-4432-b171-8d0352e668f4",
+    "minAge":"3",
+    "maxAge":"6",
+    "idSizeVariation":"15dd75e17d66053b0d0c9c68f2ca12bd"
+}
