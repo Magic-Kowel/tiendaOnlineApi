@@ -1,5 +1,9 @@
 import { pool } from "../../db.js"
 import logger from "../../libs/logger.js"
+import { 
+    SUCCESS_MESSAGE_DELETE,
+    ERROR_MESSAGE_DELETE
+} from "../../messagesSystem.js";
 export const deleteSubcategory = async (req,res) =>{
     try {
         const id = req.params.idSubcategory;
@@ -7,12 +11,12 @@ export const deleteSubcategory = async (req,res) =>{
         WHERE ecodsubcategoria = ?`,[id]);
         if(result.affectedRows <= 0){
             return res.status(404).json({
-                message: 'error when deleting'
+                message: ERROR_MESSAGE_DELETE
             });
         }
         return res.status(200).json({
             delete:true,
-            message:"Delete with success"
+            message:SUCCESS_MESSAGE_DELETE
         });
     } catch (error) {
         console.log(error);

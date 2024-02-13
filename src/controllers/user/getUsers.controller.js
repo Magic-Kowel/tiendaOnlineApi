@@ -1,6 +1,7 @@
 import { pool } from "../../db.js";
 import logger from "../../libs/logger.js";
 import { STATUS_USER_ACTIVE } from "../../config.js";
+import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
 export const getUsers = async(req,res) =>{
   try {
       const [rows] = await pool.query(`
@@ -21,7 +22,7 @@ export const getUsers = async(req,res) =>{
   } catch (error) {
     logger.error(error);
       return res.status(500).json({
-          message: 'Something goes wrong'
+          message: ERROR_MESSAGE_GENERIC
       });
   }
 }

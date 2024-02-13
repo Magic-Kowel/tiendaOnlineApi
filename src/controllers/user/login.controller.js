@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import { SECRET_KEY,STATUS_USER_ACTIVE } from "../../config.js";
 import logger from "../../libs/logger.js";
+import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
 export const login = async(req,res)=>{
     const {password,email} = req.body;
     try {
@@ -51,7 +52,7 @@ export const login = async(req,res)=>{
         logger.error(error);
         console.log(error);
         return res.status(500).json({
-            messahe:'Something goes wrong'
+            messahe:ERROR_MESSAGE_GENERIC
         })
     }
 }

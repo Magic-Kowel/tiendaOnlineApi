@@ -2,6 +2,7 @@ import { pool } from "../../../db.js";
 import logger from "../../../libs/logger.js";
 import { uid } from "uid";
 import { STATUS_USER_ACTIVE } from "../../../config.js";
+import { SUCCESS_MESSAGE_INSERT } from "../../../messagesSystem.js";
 export const createSizeVariation = async (req,res) =>{
     try {
         const uidSize = uid(32);
@@ -24,7 +25,7 @@ export const createSizeVariation = async (req,res) =>{
         ]);
         return res.status(200).json({
             created:true,
-            message:"Created with success"
+            message:SUCCESS_MESSAGE_INSERT
         });
     } catch (error) {
         console.error(error);

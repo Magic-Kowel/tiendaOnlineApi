@@ -1,5 +1,9 @@
 import { pool } from "../../db.js"
 import logger from "../../libs/logger.js"
+import { 
+    ERROR_MESSAGE_GENERIC,
+    ERROR_MESSAGE_CATEGORY_NOT_FOUND
+} from "../../messagesSystem.js";
 export const getCategory = async (req,res) =>{
     try {
         const id = req.params.idCategory;
@@ -11,7 +15,7 @@ export const getCategory = async (req,res) =>{
         and ecodCategoria = ?`,[id]);
         if(rows.length <= 0){
             return res.status(404).json({
-                message: 'caegory not found'
+                message: ERROR_MESSAGE_CATEGORY_NOT_FOUND
             });
         }
         res.json(rows);
@@ -19,7 +23,7 @@ export const getCategory = async (req,res) =>{
         logger.error(error);
         console.error(error);
         return res.status(500).json({
-            message: 'Something goes wrong'
+            message: ERROR_MESSAGE_GENERIC
         });
     }
 }

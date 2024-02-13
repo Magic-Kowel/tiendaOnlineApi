@@ -1,5 +1,6 @@
 import { pool } from "../../db.js";
 import logger from "../../libs/logger.js";
+import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
 export const validateEmail = async(req,res)=>{
     try {
         const [row] = await pool.query('SELECT count(*) as tCorreo FROM catusuarios WHERE tCorreo = ? ',[req.params.email]);
@@ -17,7 +18,7 @@ export const validateEmail = async(req,res)=>{
     } catch (error) {
         logger.error(error);
         return res.status(500).json({
-            message: 'Something goes wrong'
+            message: ERROR_MESSAGE_GENERIC
         })
     }
 }

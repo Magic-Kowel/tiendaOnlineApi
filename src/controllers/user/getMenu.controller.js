@@ -1,5 +1,6 @@
 import { pool } from "../../db.js"
 import logger from "../../libs/logger.js"
+import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
 export const getMenu = async (req,res) =>{
     const {idUser} = req.body;
     try {
@@ -21,15 +22,7 @@ export const getMenu = async (req,res) =>{
     } catch (error) {
         logger.error(error);
         return res.status(500).json({
-            message: 'Something goes wrong'
+            message: ERROR_MESSAGE_GENERIC
         })
     }
 }
-// SELECT rumspc.ecodRelusRarioMenuSubmenuController, cm.tNombre AS Menu,
-// cm.Iconos,
-// cs.tNombre AS submenuNombre,
-// cs.tUrl as urlSubMenu
-// FROM relusuariomenusubmenucontroller rumspc 
-// LEFT JOIN catmenu cm ON cm.ecodMenu= rumspc.ecodMenu 
-// LEFT JOIN catsubmenu cs ON cs.ecodSubmenu = rumspc.ecodSubmenu
-//     WHERE rumspc.ecodUsuario = ?;

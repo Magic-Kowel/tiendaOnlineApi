@@ -1,5 +1,9 @@
 import { pool } from "../../db.js"
 import logger from "../../libs/logger.js"
+import { 
+    ERROR_MESSAGE_GENERIC,
+    ERROR_MESSAGE_SUB_CATEGORY_NOT_FOUND
+} from "../../messagesSystem.js";
 export const getSubcategory = async (req,res) =>{
     try {
         const id = req.params.idSubcategory;
@@ -10,7 +14,7 @@ export const getSubcategory = async (req,res) =>{
         and ecodsubcategoria = ?`,[id]);
         if(rows.length <= 0){
             return res.status(404).json({
-                message: 'caegory not found'
+                message: ERROR_MESSAGE_SUB_CATEGORY_NOT_FOUND
             });
         }
         res.json(rows);
@@ -18,7 +22,7 @@ export const getSubcategory = async (req,res) =>{
         console.error(error);
         logger.error(error);
         return res.status(500).json({
-            message: 'Something goes wrong'
+            message: ERROR_MESSAGE_GENERIC
         })
     }
 }

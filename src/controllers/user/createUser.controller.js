@@ -5,6 +5,7 @@ import { sendEmail } from "../../libs/sendEmail.js";
 import { STATUS_USER_PROCESS,TYPE_USER_CLIENT } from "../../config.js";
 import logger from "../../libs/logger.js";
 import { BASE_URL_FRONT } from "../../config.js";
+import { SUCCESS_MESSAGE_INSERT } from "../../messagesSystem.js";
 export const createUser = async (req,res)=>{
   try {
       const {
@@ -53,7 +54,7 @@ export const createUser = async (req,res)=>{
       sendEmail(emailObject);
       res.status(200).json({
         created:true,
-        message:"Created with success"
+        message:SUCCESS_MESSAGE_INSERT
       });
   } catch (error) {
       logger.error(error);

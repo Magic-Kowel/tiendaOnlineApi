@@ -1,5 +1,6 @@
 import { pool } from "../../db.js";
 import logger from "../../libs/logger.js";
+import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
 export const getSubCategories = async (req,res) =>{
     try {
         const id = req.params.idCategory;
@@ -10,7 +11,7 @@ export const getSubCategories = async (req,res) =>{
     } catch (error) {
         logger.error(error);
         return res.status(500).json({
-            message: 'Something goes wrong'
+            message: ERROR_MESSAGE_GENERIC
         });
     }
 }

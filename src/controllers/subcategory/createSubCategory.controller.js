@@ -1,12 +1,14 @@
 import { pool } from "../../db.js"
 import logger from "../../libs/logger.js"
 import { uid } from "uid";
+import { SUCCESS_MESSAGE_INSERT } from "../../messagesSystem.js";
 export const createSubCategory = async (req,res) =>{
     try {
         const uidUser = uid(32);
         const {name,idCategory} = req.body;
-        const [row] = await pool.query(`insert into catsubcategoria (ecodsubcategoria,tNombre,ecodCategoria)
-            values(?,?,?)
+        const [row] = await pool.query(`insert into catsubcategoria 
+                (ecodsubcategoria,tNombre,ecodCategoria)
+                values(?,?,?)
         `,[
             uidUser,
             name,
@@ -14,7 +16,7 @@ export const createSubCategory = async (req,res) =>{
         ]);
         return res.status(200).json({
             created:true,
-            message:"Created with success"
+            message:SUCCESS_MESSAGE_INSERT
         });
     } catch (error) {
         console.error(error);

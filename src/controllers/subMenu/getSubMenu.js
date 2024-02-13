@@ -1,5 +1,6 @@
 import { pool } from "../../db.js"
 import logger from "../../libs/logger.js"
+import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
 export const getSubMenu = async (req,res) =>{
     try {
         const id = req.params.id;
@@ -17,7 +18,7 @@ export const getSubMenu = async (req,res) =>{
         console.log(error);
         logger.error(error);
         return res.status(500).json({
-            message: 'Something goes wrong'
+            message: ERROR_MESSAGE_GENERIC
         });
     }
 }
