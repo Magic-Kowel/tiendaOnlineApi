@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { createMaterial } from "../controllers/materials/createMaterials.controller.js";
+import { getMaterials } from "../controllers/materials/getMaterials.controllers.js";
+import { updateMaterial } from "../controllers/materials/updateMaterial.controller.js";
+import { getMaterial } from "../controllers/materials/getMaterial.controllers.js";
+import { deleteMaterial } from "../controllers/materials/deleteMaterial.controllers.js";
+import verifyToken from "../libs/verifyToken.js";
+const router = Router();
+router.post("/material",verifyToken,createMaterial);
+router.patch("/material",verifyToken,updateMaterial);
+router.get("/materials",verifyToken,getMaterials);
+router.get("/material/:idMaterial",verifyToken,getMaterial);
+router.delete("/material/:idMaterial",verifyToken,deleteMaterial);
+export default router;

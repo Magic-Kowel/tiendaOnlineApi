@@ -1,0 +1,30 @@
+@api=  http://localhost:3000/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1YTQwY2M4NDYzOTljYjI3NmFiM2M5MTQ0NjYxMmQwIiwidHlwZVVzZXIiOiJhZG1pbiIsImlhdCI6MTcwNzgwNjk3MiwiZXhwIjoxNzA4NDExNzcyfQ.d9JoKvM6yRamtlpDC8WcyC2o5aoZrtREz-SNqf2DBfo
+
+
+GET {{api}}/materials
+x-access-token: {{token}}
+###
+GET {{api}}/material/9be77db114825a13e1016ef52eccf5f2
+x-access-token: {{token}}
+###
+POST {{api}}/material
+content-type:application/json
+x-access-token: {{token}}
+
+{
+    "nameMaterial":"algodon"
+}
+###
+
+PATCH {{api}}/material
+content-type:application/json
+x-access-token: {{token}}
+
+{
+    "nameMaterial":"piel",
+    "idMaterial":"9be77db114825a13e1016ef52eccf5f2"
+}
+###
+DELETE {{api}}/material/255d7bedf9967410cf97fec1f2886143
+x-access-token: {{token}}
