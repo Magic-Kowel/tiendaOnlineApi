@@ -1,5 +1,5 @@
 @api=  http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1YTQwY2M4NDYzOTljYjI3NmFiM2M5MTQ0NjYxMmQwIiwidHlwZVVzZXIiOiJhZG1pbiIsImlhdCI6MTcwNzE3OTUyOSwiZXhwIjoxNzA3Nzg0MzI5fQ.MRnxPmw2CTk81IcqJiYg4l2OaiazD3sZfHSSSbYM2E4
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1YTQwY2M4NDYzOTljYjI3NmFiM2M5MTQ0NjYxMmQwIiwidHlwZVVzZXIiOiJhZG1pbiIsImlhdCI6MTcwODIxMDU5OSwiZXhwIjoxNzA4ODE1Mzk5fQ.0jIE2bP7TtefFKHsjKIKJVKu602hqXW3Aj82se4MG6o
 
 
 GET {{api}}/sizes/variation
@@ -32,4 +32,14 @@ x-access-token: {{token}}
     "minAge":"3",
     "maxAge":"6",
     "idSizeVariation":"15dd75e17d66053b0d0c9c68f2ca12bd"
+}
+
+###
+POST {{api}}/size/variation/validate
+content-type:application/json
+x-access-token: {{token}}
+
+{
+    "idSize":"e865ea2ff13726155aa3190bdb29416a",
+    "idAgeGroup":"480816cc-1cbd-4714-8697-c218dc875070"
 }
