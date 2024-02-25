@@ -1,17 +1,17 @@
 import { STATUS_USER_ACTIVE } from "../../../config.js";
 import { pool } from "../../../db.js";
 import logger from "../../../libs/logger.js";
+import { toolValidateVariation } from "./toolValidateVariation.js";
 export const validateVariation = async (req,res) =>{
     try {
-        const {idSize,idAgeGroup} = req.body;
-        const [rows] = await pool.query(`SELECT ecodTalla, ecodGrupoetario, COUNT(*) as cantidad
-        FROM tallavariacion
-        WHERE ecodTalla = ? 
-        AND ecodGrupoetario = ?
-        AND ecodEstatus = ?
-        GROUP BY ecodTalla, ecodGrupoetario
-        HAVING cantidad > 1;`,[idSize,idAgeGroup,STATUS_USER_ACTIVE]);
-        return res.json(rows)
+        const {idSize,idAgeGroup,isEdit} = req.body;
+        const response = await toolValidateVariation({
+            idSize:idSize,
+            idAgeGroup:idAgeGroup,
+            STATUS_USER_ACTIVE:STATUS_USER_ACTIVE,
+            isEdit:isEdit
+        });
+        return res.json(response)
     } catch (error) {
         console.error(error);
         logger.error(error);

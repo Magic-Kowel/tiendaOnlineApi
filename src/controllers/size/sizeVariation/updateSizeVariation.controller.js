@@ -1,17 +1,27 @@
 import { pool } from "../../../db.js";
 import logger from "../../../libs/logger.js";
 import { SUCCESS_MESSAGE_UPDATE } from "../../../messagesSystem.js";
+import { toolValidateVariation } from "./toolValidateVariation.js";
 export const updateSizeVariation = async(req,res)=>{
-    console.log("entro");
     try {
         const {
             idSizeVariation,
             idSize,
             idAgeGroup,
             minAge,
-            maxAge
+            maxAge,
         } = req.body;
-        
+        const response = await toolValidateVariation({
+            idSize:idSize,
+            idAgeGroup:idAgeGroup,
+        });
+        console.log(response);
+        if(response > 0){
+            return res.status(422).json({
+                created:true,
+                message:DUPLICATE_COMBINATION
+            });
+        }
         const [result] = await pool.query(`UPDATE tallavariacion 
         SET 
         ecodTalla  = IFNULL(?,ecodTalla ),

@@ -16,30 +16,33 @@ import ageGroupsRouer from "./routes/ageGroups.routes.js";
 import materialRouer from "./routes/materials.routes.js";
 import gendersRouer from "./routes/genders.routes.js";
 
-const app = express();
- 
-app.use(cors());
-app.use(morgan('short'));
-app.use(express.json());
-//apis
-app.use('/api',usersRoutes);
-app.use('/api',categoryRoutes);
-app.use('/api',subCategoryRouter);
-app.use('/api',securityRouer);
-app.use('/api',sizeRouer);
-app.use('/api',ageGroupsRouer);
-app.use('/api',materialRouer);
-app.use('/api',gendersRouer);
-app.use((req,res, next) =>{
-    res.status(404).json({
-        message: 'endpoint not found'
+try {
+    const app = express();
+     
+    app.use(cors());
+    app.use(morgan('short'));
+    app.use(express.json());
+    //apis
+    app.use('/api',usersRoutes);
+    app.use('/api',categoryRoutes);
+    app.use('/api',subCategoryRouter);
+    app.use('/api',securityRouer);
+    app.use('/api',sizeRouer);
+    app.use('/api',ageGroupsRouer);
+    app.use('/api',materialRouer);
+    app.use('/api',gendersRouer);
+    app.use((req,res, next) =>{
+        res.status(404).json({
+            message: 'endpoint not found'
+        })
     })
-})
-// const server = http.createServer(app);
-// const httpServer = server.listen(PORT);
-app.listen(PORT);
-console.log(`server on port ${PORT}`);
- 
+    // const server = http.createServer(app);
+    // const httpServer = server.listen(PORT);
+    app.listen(PORT);
+    console.log(`server on port ${PORT}`)
+} catch (error) {
+    console.error(error);
+}
 // const io = new WebSocketServer(httpServer, {
 //     cors: {
 //         origin: "*"

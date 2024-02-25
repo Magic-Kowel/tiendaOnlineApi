@@ -12,19 +12,26 @@ import { getSizeVariation } from "../controllers/size/sizeVariation/getSizevaria
 import { deleteSizeVariation } from "../controllers/size/sizeVariation/deleteSizeVariation.controller.js";
 import { updateSizeVariation } from "../controllers/size/sizeVariation/updateSizeVariation.controller.js";
 import { validateVariation } from "../controllers/size/sizeVariation/validateVariation.controller.js";
+import { getOpcionsSizesVariation } from "../controllers/size/sizeVariation/getOpcionsSizesVariation.controller.js";
 import verifyToken from "../libs/verifyToken.js";
 const router = Router();
-//routes sizes
-router.get("/sizes",verifyToken,getSizes);
-router.get("/size/:idSize",verifyToken,getSize);
-router.post("/size",verifyToken,createSize);
-router.delete("/size/:idSize",deleteSize);
-router.patch("/size",updateSize);
-// routes createSizeVariation
-router.post("/size/variation",verifyToken,createSizeVariation);
-router.post("/size/variation/validate",verifyToken,validateVariation);
-router.get("/sizes/variation",verifyToken,getSizesVariation);
-router.get("/size/variation/:idSizeVariation",verifyToken,getSizeVariation);
-router.delete("/size/variation/:idSizeVariation",verifyToken,deleteSizeVariation);
-router.patch("/size/variation",verifyToken,updateSizeVariation);
+try {
+    //routes sizes
+    router.get("/sizes",verifyToken,getSizes);
+    router.get("/size/:idSize",verifyToken,getSize);
+    router.post("/size",verifyToken,createSize);
+    router.delete("/size/:idSize",deleteSize);
+    router.patch("/size",updateSize);
+    // routes createSizeVariation
+    router.post("/size/variation",verifyToken,createSizeVariation);
+    router.post("/size/variation/validate",verifyToken,validateVariation);
+    router.get("/sizes/variation",verifyToken,getSizesVariation);
+    router.get("/size/variation/:idSizeVariation",verifyToken,getSizeVariation);
+    router.delete("/size/variation/:idSizeVariation",verifyToken,deleteSizeVariation);
+    router.patch("/size/variation",verifyToken,updateSizeVariation);
+    router.get("/size/opcions/variation",verifyToken,getOpcionsSizesVariation);
+} catch (error) {
+    console.error(error);
+}
+
 export default router;

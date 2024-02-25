@@ -2,11 +2,23 @@ import { pool } from "../../../db.js";
 import logger from "../../../libs/logger.js";
 import { uid } from "uid";
 import { STATUS_USER_ACTIVE } from "../../../config.js";
-import { SUCCESS_MESSAGE_INSERT } from "../../../messagesSystem.js";
+import { SUCCESS_MESSAGE_INSERT, DUPLICATE_COMBINATION } from "../../../messagesSystem.js";
+import { toolValidateVariation } from "./toolValidateVariation.js";
 export const createSizeVariation = async (req,res) =>{
     try {
         const uidSize = uid(32);
         const {idSize,idAgeGroup,minAge,maxAge} = req.body;
+        const response = await toolValidateVariation({
+            idSize:idSize,
+            idAgeGroup:idAgeGroup,
+            STATUS_USER_ACTIVE:STATUS_USER_ACTIVE
+        });
+        if(response > 0){
+            return res.status(422).json({
+                created:true,
+                message:DUPLICATE_COMBINATION
+            });
+        }
         const [row] = await pool.query(`INSERT INTO tallavariacion(
             ecodTallavariacion,
             ecodTalla,

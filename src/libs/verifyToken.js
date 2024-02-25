@@ -10,9 +10,10 @@ function verifyToken(req,res,next){
     }
     jwt.verify(token,SECRET_KEY,(err,data)=>{
         if(err){
-            res.sendStatus(403);
+            return res.sendStatus(403);
+        }else{
+            next();
         }
     });
-    next();
 }
 export default verifyToken;
