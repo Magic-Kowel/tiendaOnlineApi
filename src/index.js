@@ -15,6 +15,7 @@ import sizeRouer from "./routes/size.routes.js";
 import ageGroupsRouer from "./routes/ageGroups.routes.js";
 import materialRouer from "./routes/materials.routes.js";
 import gendersRouer from "./routes/genders.routes.js";
+import productRouer from "./routes/product.controller.js";
 
 try {
     const app = express();
@@ -31,6 +32,7 @@ try {
     app.use('/api',ageGroupsRouer);
     app.use('/api',materialRouer);
     app.use('/api',gendersRouer);
+    app.use('/api',productRouer);
     app.use((req,res, next) =>{
         res.status(404).json({
             message: 'endpoint not found'
