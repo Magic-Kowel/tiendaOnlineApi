@@ -19,7 +19,7 @@ import productRouer from "./routes/product.controller.js";
 
 try {
     const app = express();
-     
+
     app.use(cors());
     app.use(morgan('short'));
     app.use(express.json());
