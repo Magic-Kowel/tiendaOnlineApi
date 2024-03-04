@@ -12,7 +12,8 @@ export const getSizeVariation = async (req,res) =>{
             grupoetario.ecodGrupoetario as idAgeGroup,
             catestatus.tNombre as status,
             nEdadMinima as minAge,
-            nEdadMaxima as maxAge
+            nEdadMaxima as maxAge,
+            nTalla as size
         FROM tallavariacion
         INNER JOIN talla
         on talla.ecodTalla = tallavariacion.ecodTalla

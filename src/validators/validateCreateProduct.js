@@ -1,5 +1,5 @@
 import { check, validationResult } from "express-validator";
-const validateCreate =[
+const validateCreateProduct =[
     check('nameProduct')
         .exists()
         .notEmpty().withMessage("The nameProduct field is required"),
@@ -15,7 +15,6 @@ const validateCreate =[
     check('idGender')
         .exists()
         .notEmpty().withMessage("The idGender field is required"),
-    check('files'),
     check('imageUrls')
         .exists()
         .notEmpty().withMessage("The imageUrls field is required"),
@@ -23,12 +22,4 @@ const validateCreate =[
         .exists()
         .notEmpty().withMessage("The sizesList field is required")
 ];
-const handleValidationCreate = (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    next(); // Continúa si no hay errores de validación
-};
-
-export { validateCreate, handleValidationCreate };
+export { validateCreateProduct };

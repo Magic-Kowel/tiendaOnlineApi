@@ -10,12 +10,12 @@ export const updateSizeVariation = async(req,res)=>{
             idAgeGroup,
             minAge,
             maxAge,
+            size
         } = req.body;
         const response = await toolValidateVariation({
             idSize:idSize,
             idAgeGroup:idAgeGroup,
         });
-        console.log(response);
         if(response > 0){
             return res.status(422).json({
                 created:true,
@@ -27,13 +27,15 @@ export const updateSizeVariation = async(req,res)=>{
         ecodTalla  = IFNULL(?,ecodTalla ),
         ecodGrupoetario  = IFNULL(?,ecodGrupoetario ),
         nEdadMinima = IFNULL(?,nEdadMinima),
-        nEdadMaxima = IFNULL(?,nEdadMaxima)
+        nEdadMaxima = IFNULL(?,nEdadMaxima),
+        nTalla = IFNULL(?,nTalla)
         WHERE ecodTallavariacion = ?`,
         [
             idSize,
             idAgeGroup,
             minAge,
             maxAge,
+            size,
             idSizeVariation
         ]);
         if(result.affectedRows > 0){

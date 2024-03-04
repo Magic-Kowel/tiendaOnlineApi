@@ -7,7 +7,7 @@ import { toolValidateVariation } from "./toolValidateVariation.js";
 export const createSizeVariation = async (req,res) =>{
     try {
         const uidSize = uid(32);
-        const {idSize,idAgeGroup,minAge,maxAge} = req.body;
+        const {idSize,idAgeGroup,minAge,maxAge,size} = req.body;
         const response = await toolValidateVariation({
             idSize:idSize,
             idAgeGroup:idAgeGroup,
@@ -25,14 +25,16 @@ export const createSizeVariation = async (req,res) =>{
             ecodGrupoetario,
             nEdadMinima,
             nEdadMaxima,
+            nTalla,
             ecodEstatus
-        ) VALUES(?,?,?,?,?,?)
+        ) VALUES(?,?,?,?,?,?,?)
         `,[
             uidSize,
             idSize,
             idAgeGroup,
             minAge || null,
             maxAge || null,
+            size ||null,
             STATUS_USER_ACTIVE
         ]);
         return res.status(200).json({
