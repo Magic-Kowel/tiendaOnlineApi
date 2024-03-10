@@ -1,17 +1,12 @@
-import { pool } from "../../db.js"
-import { uid } from "uid";
 import logger from "../../libs/logger.js"
-import { SUCCESS_MESSAGE_INSERT } from "../../messagesSystem.js";
-import { STATUS_USER_ACTIVE } from "../../config.js";
-import { v2 as cloudinary } from 'cloudinary';
+import { pool } from "../../db.js";
+import { uid } from "uid";
+import { SUCCESS_MESSAGE_UPDATE } from "../../messagesSystem.js";
 import { conectCloudinary } from "../../libs/conectCloudinary.js";
 import { clearFilesUpload } from "../../libs/clearFilesUpload.js";
-export const createProduct = async (req,res) =>{
+import { v2 as cloudinary } from 'cloudinary';
+export const updateProduct = async (req,res) =>{
     conectCloudinary(cloudinary);
-    console.log("imageUrls",req.body.imageUrls);
-    if ((!req.files || req.files.length === 0 ) && (!req.body.imageUrls || req.body.imageUrls.length ===0)) {
-        return res.status(400).json({ message: "No se han proporcionado alguna imagen" });
-    }
     let connection;
     const imagensUpload = [];
     try {
@@ -26,56 +21,36 @@ export const createProduct = async (req,res) =>{
         }
         connection = await pool.getConnection();
         await connection.beginTransaction();
-        const uidProducto = uid(32);
         const {
             description,
+            idCategory,
+            idProduct,
             idGender,
             idMaterial,
             idSubCategory,
             nameProduct,
-            sizesList,
             imageUrls
         } = req.body;
-        const [rowsProduct] = await pool.query(`INSERT INTO catproductos
-        (
-            ecodProductos,
-            tNombre,
-            ecodsubcategoria,
-            ecodEstatus,
-            ecodMaterial,
-            ecodGenero,
-            Descripcion
-        ) VALUES (?,?,?,?,?,?,?)`, [
-            uidProducto,
+        const parseImageUrls = JSON.parse(imageUrls);
+        const [result] = await pool.query(`UPDATE 
+        catproductos 
+        SET tNombre = IFNULL(?,tNombre),
+        Descripcion = IFNULL(?,Descripcion),
+        ecodMaterial = IFNULL(?,ecodMaterial),
+        ecodGenero = IFNULL(?,ecodGenero),
+        ecodsubcategoria = IFNULL(?,ecodsubcategoria)
+        WHERE ecodProductos = ?`,
+        [
             nameProduct,
-            idSubCategory,
-            STATUS_USER_ACTIVE,
+            description,
             idMaterial,
             idGender,
-            description
+            idSubCategory,
+            idProduct
         ]);
-        const parseSizesList = JSON.parse(sizesList);
-        const parseImageUrls = JSON.parse(imageUrls);
-        await Promise.all(parseSizesList.map(async (item) => {
-            const uidVariacionproducto = uid(32);
-            return pool.query(`INSERT INTO relvariacionproducto
-            (
-                ecodVariacionproducto,
-                ecodTallavariacion,
-                ecodProductos,
-                nPrecio,
-                nStock
-            ) VALUES (?,?,?,?,?)`, [
-                uidVariacionproducto,
-                item.idSizeVariation,
-                uidProducto,
-                item.price,
-                item.stock
-            ]);
-        }));
-        console.log("3");
         await Promise.all(imagensUpload.map(async (item) => {
             const uidImagen = uid(32);
+            console.log("idProduct",idProduct);
             return pool.query(`INSERT INTO relproductoimagen
             (
                 ecodRelProductoImagen,
@@ -86,11 +61,12 @@ export const createProduct = async (req,res) =>{
             ) VALUES (?,?,?,?,?)`, [
                 uidImagen,
                 item.url,
-                uidProducto,
+                idProduct,
                 "servicio",
                 item.public_id
             ]);
         }));
+        console.log("parseImageUrls",parseImageUrls);
         if(parseImageUrls.length){
             await Promise.all(parseImageUrls.map(async (item) => {
                 const uidImagen = uid(32);
@@ -103,19 +79,18 @@ export const createProduct = async (req,res) =>{
                 ) VALUES (?,?,?,?)`, [
                     uidImagen,
                     item,
-                    uidProducto,
+                    idProduct,
                     "url"
                 ]);
             }));
         }
         await connection.commit();
         return res.status(200).json({
-            created:true,
-            message:SUCCESS_MESSAGE_INSERT
+            updated:true,
+            message:SUCCESS_MESSAGE_UPDATE
         });
-       
     } catch (error) {
-      // Revertir la transacción en caso de error
+        // Revertir la transacción en caso de error
         await Promise.all(imagensUpload.map(async (item) => {
             await cloudinary.uploader.destroy(item.public_id);
         }));
@@ -127,10 +102,10 @@ export const createProduct = async (req,res) =>{
             message: error
         });
     } finally {
-      // Liberar la conexión de vuelta al pool
-      if (connection) {
-        connection.release();
-      }
-      clearFilesUpload(req.files);
+        // Liberar la conexión de vuelta al pool
+        if (connection) {
+          connection.release();
+        }
+        clearFilesUpload(req.files);
     }
 }

@@ -14,16 +14,20 @@ import { updateSizeVariation } from "../controllers/size/sizeVariation/updateSiz
 import { validateVariation } from "../controllers/size/sizeVariation/validateVariation.controller.js";
 import { getOpcionsSizesVariation } from "../controllers/size/sizeVariation/getOpcionsSizesVariation.controller.js";
 import verifyToken from "../libs/verifyToken.js";
+//validations 
+import { validateCreateSize } from "../validators/validateCreateSize.js";
+import { validateUpdateSize } from "../validators/validateUpdateSize.js";
+import {handleValidationErrors} from "../libs/handleValidationErrors.js"
 const router = Router();
 try {
     //routes sizes
     router.get("/sizes",verifyToken,getSizes);
     router.get("/size/:idSize",verifyToken,getSize);
-    router.post("/size",verifyToken,createSize);
+    router.post("/size",verifyToken,validateCreateSize,handleValidationErrors,createSize);
     router.delete("/size/:idSize",deleteSize);
-    router.patch("/size",updateSize);
+    router.patch("/size",validateUpdateSize,handleValidationErrors,updateSize);
     // routes createSizeVariation
-    router.post("/size/variation",verifyToken,createSizeVariation);
+    router.post("/size/variation",verifyToken,createSizeVariation,handleValidationErrors);
     router.post("/size/variation/validate",verifyToken,validateVariation);
     router.get("/sizes/variation",verifyToken,getSizesVariation);
     router.get("/size/variation/:idSizeVariation",verifyToken,getSizeVariation);

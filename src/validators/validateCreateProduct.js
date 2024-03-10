@@ -1,4 +1,4 @@
-import { check, validationResult } from "express-validator";
+import { check } from "express-validator";
 const validateCreateProduct =[
     check('nameProduct')
         .exists()
@@ -15,11 +15,8 @@ const validateCreateProduct =[
     check('idGender')
         .exists()
         .notEmpty().withMessage("The idGender field is required"),
-    check('imageUrls')
-        .exists()
-        .notEmpty().withMessage("The imageUrls field is required"),
     check('sizesList')
         .exists()
-        .notEmpty().withMessage("The sizesList field is required")
+        .notEmpty().withMessage("The sizesList field is required"),
 ];
 export { validateCreateProduct };

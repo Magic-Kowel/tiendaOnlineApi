@@ -7,6 +7,8 @@ import { getMenusActive } from "../controllers/menu/getMenusActive.js";
 import { updateMenu } from "../controllers/menu/updateMenu.controller.js";
 import { validateCreateMenu } from "../validators/validateCreateMenu.js";
 import { validateUpdateMenu } from "../validators/validateUpdateMenu.js";
+import { validateCreateSubmenu } from "../validators/validateCreateSubmenu.js";
+import { validateUpdateSubmenu } from "../validators/validateUpdateSubmenu.js";
 import { handleValidationErrors } from "../libs/handleValidationErrors.js";
 //submenu
 import { getSubMenus } from "../controllers/subMenu/getSubMenus.js";
@@ -27,6 +29,6 @@ router.get("/menu/:id",verifyToken,getMenu);
 router.get("/submenu/:id",verifyToken,getSubMenu);
 router.get("/submenus",verifyToken,getSubMenus);
 router.get("/submenus/active",verifyToken,getSubMenusActive);
-router.post("/submenu",verifyToken,createSubMenu);
-router.patch("/submenu",verifyToken,updateSubMenu);
+router.post("/submenu",verifyToken,validateCreateSubmenu,handleValidationErrors,createSubMenu);
+router.patch("/submenu",verifyToken,validateUpdateSubmenu,handleValidationErrors,updateSubMenu);
 export default router;
