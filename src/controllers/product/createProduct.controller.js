@@ -64,13 +64,15 @@ export const createProduct = async (req,res) =>{
                 ecodTallavariacion,
                 ecodProductos,
                 nPrecio,
-                nStock
-            ) VALUES (?,?,?,?,?)`, [
+                nStock,
+                bPrincipal 
+            ) VALUES (?,?,?,?,?,?)`, [
                 uidVariacionproducto,
                 item.idSizeVariation,
                 uidProducto,
                 item.price,
-                item.stock
+                item.stock,
+                item.isMain
             ]);
         }));
         console.log("3");

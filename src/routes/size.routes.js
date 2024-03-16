@@ -13,6 +13,7 @@ import { deleteSizeVariation } from "../controllers/size/sizeVariation/deleteSiz
 import { updateSizeVariation } from "../controllers/size/sizeVariation/updateSizeVariation.controller.js";
 import { validateVariation } from "../controllers/size/sizeVariation/validateVariation.controller.js";
 import { getOpcionsSizesVariation } from "../controllers/size/sizeVariation/getOpcionsSizesVariation.controller.js";
+import { getSizeVariationProdruct } from "../controllers/size/sizeVariation/getSizeVariationProdruct.controller.js";
 import verifyToken from "../libs/verifyToken.js";
 //validations 
 import { validateCreateSize } from "../validators/validateCreateSize.js";
@@ -31,6 +32,7 @@ try {
     router.post("/size/variation/validate",verifyToken,validateVariation);
     router.get("/sizes/variation",verifyToken,getSizesVariation);
     router.get("/size/variation/:idSizeVariation",verifyToken,getSizeVariation);
+    router.get("/size/variation/prodruct/:idProduct",getSizeVariationProdruct);
     router.delete("/size/variation/:idSizeVariation",verifyToken,deleteSizeVariation);
     router.patch("/size/variation",verifyToken,updateSizeVariation);
     router.get("/size/opcions/variation",verifyToken,getOpcionsSizesVariation);

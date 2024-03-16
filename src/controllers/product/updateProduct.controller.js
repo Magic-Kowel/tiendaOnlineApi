@@ -1,6 +1,7 @@
 import logger from "../../libs/logger.js"
 import { pool } from "../../db.js";
 import { uid } from "uid";
+import { STATUS_USER_DELETE } from "../../config.js";
 import { SUCCESS_MESSAGE_UPDATE } from "../../messagesSystem.js";
 import { conectCloudinary } from "../../libs/conectCloudinary.js";
 import { clearFilesUpload } from "../../libs/clearFilesUpload.js";
@@ -29,7 +30,8 @@ export const updateProduct = async (req,res) =>{
             idMaterial,
             idSubCategory,
             nameProduct,
-            imageUrls
+            imageUrls,
+            sizesList
         } = req.body;
         const parseImageUrls = JSON.parse(imageUrls);
         const [result] = await pool.query(`UPDATE 
@@ -82,6 +84,57 @@ export const updateProduct = async (req,res) =>{
                     idProduct,
                     "url"
                 ]);
+            }));
+        }
+        const parseSizesList = JSON.parse(sizesList);
+        if(parseSizesList){
+            await Promise.all(parseSizesList.map(async (item) => {
+                if(item.isDelete){
+                    return pool.query(`UPDATE relvariacionproducto
+                    SET ecodEstatus = ? WHERE ecodVariacionproducto = ? limit 1`, [ STATUS_USER_DELETE, item.idSizeVariationProduct]);
+                }
+            }));
+            await Promise.all(parseSizesList.map(async (item) => {
+                if(item.isUpdate){
+                    return pool.query(
+                        `UPDATE relvariacionproducto
+                        SET
+                            bPrincipal = IFNULL(?, bPrincipal),
+                            nPrecio = IFNULL(?, nPrecio),
+                            nStock = IFNULL(?, nStock)
+                        WHERE
+                            ecodVariacionproducto = ?
+                        LIMIT 1`,
+                        [
+                            item.isMain,
+                            item.price,
+                            item.stock,
+                            item.idSizeVariationProduct
+                        ]
+                    );
+                    
+                }
+            }));
+            const uidVariacionproducto = uid(32);
+            await Promise.all(parseSizesList.map(async (item) => {
+                if(item.isNew){
+                    return pool.query(`INSERT INTO relvariacionproducto
+                    (
+                        ecodVariacionproducto,
+                        ecodTallavariacion,
+                        ecodProductos,
+                        nPrecio,
+                        nStock,
+                        bPrincipal 
+                    ) VALUES (?,?,?,?,?,?)`, [
+                        uidVariacionproducto,
+                        item.idSizeVariation,
+                        idProduct,
+                        item.price,
+                        item.stock,
+                        item.isMain
+                    ]);
+                }
             }));
         }
         await connection.commit();

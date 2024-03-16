@@ -6,9 +6,8 @@ export const getImagesProdruct = async (req,res) =>{
         const id = req.params.idProduct;
         const [rows] = await pool.query(`SELECT 
         ecodRelProductoImagen as idImagen,
-        iImagen as imagen,
-        tipoAlmacenamiento as typeStorage,
-        publicId
+        ecodProductos as idProduct,
+        iImagen as imagen
     FROM relproductoimagen
     WHERE ecodProductos = ?
  `,[id]);
