@@ -56,23 +56,29 @@ export const createProduct = async (req,res) =>{
         ]);
         const parseSizesList = JSON.parse(sizesList);
         const parseImageUrls = JSON.parse(imageUrls);
-        await Promise.all(parseSizesList.map(async (item) => {
+        const isMainTrue = parseSizesList.some(size => size.isMain === true);
+        await Promise.all(parseSizesList.map(async (item, index) => {
             const uidVariacionproducto = uid(32);
+            let isMainValue = item.isMain; // Valor predeterminado basado en el elemento actual
+            // Si ninguno de los elementos tiene isMain como true y es el primer elemento, establece isMain en true
+            if (!isMainTrue && index === 0) {
+                isMainValue = true;
+            }
             return pool.query(`INSERT INTO relvariacionproducto
-            (
-                ecodVariacionproducto,
-                ecodTallavariacion,
-                ecodProductos,
-                nPrecio,
-                nStock,
-                bPrincipal 
-            ) VALUES (?,?,?,?,?,?)`, [
+                (
+                    ecodVariacionproducto,
+                    ecodTallavariacion,
+                    ecodProductos,
+                    nPrecio,
+                    nStock,
+                    bPrincipal 
+                ) VALUES (?,?,?,?,?,?)`, [
                 uidVariacionproducto,
                 item.idSizeVariation,
                 uidProducto,
                 item.price,
                 item.stock,
-                item.isMain
+                isMainValue
             ]);
         }));
         console.log("3");

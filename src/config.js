@@ -19,5 +19,6 @@ export const STATUS_USER_CANCEL = process.env.STATUS_USER_CANCEL || "5bf018a2-07
 export const STATUS_USER_FINISHED = process.env.STATUS_USER_FINISHED || "93a484c5-ce42-435e-98ac-12bc215d95b5";
 export const STATUS_USER_DELETE = process.env.STATUS_USER_DELETE || "fa6cc9a2-f221-4e27-b575-1fac2698d27a";
 
-export const TYPE_USER_CLIENT = process.env.TYPE_USER_CLIENT || '1';
+export const TYPE_USER_ADDMIN = process.env.TYPE_USER_ADDMIN || '1';
+export const TYPE_USER_CLIENT = process.env.TYPE_USER_CLIENT || '2';
 export const BASE_URL_FRONT = "http://localhost:5173";

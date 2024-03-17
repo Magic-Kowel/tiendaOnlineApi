@@ -27,7 +27,7 @@ try {
     );
     router.delete("/product/:idProduct",verifyToken,deleteProduct);
     router.delete("/product/imagen/:idImagen",verifyToken,deleteImagenProduct);
-    router.get("/products", getProducts);
+    router.get("/products/:page/", getProducts);
     router.get("/product/:idProduct", getProduct);
     router.get("/product/imagens/:idProduct", getImagesProdruct);
 
