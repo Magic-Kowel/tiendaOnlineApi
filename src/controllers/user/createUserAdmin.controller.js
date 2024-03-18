@@ -22,8 +22,8 @@ export const createUserAdmin = async (req,res)=>{
               message: 'mail already exists'
           })
       }
-      const salt = await bcrypt.genSalt(10);
-      const randomPassword = generateRandomPassword();
+      const salt = await bcrypt.genSalt(5);
+      const randomPassword = generateRandomPassword(5);
       const passwordEncript = await bcrypt.hash(randomPassword, salt);
       const uidUser = uid(32);
       const [rows] = await pool.query(
@@ -51,8 +51,13 @@ export const createUserAdmin = async (req,res)=>{
         email:email,
         subject:'Verificación de correo electrónico',
         message:`Haga clic en el enlace siguiente para verificar su dirección de correo: ${BASE_URL_FRONT}/user/validate/${uidUser} \n 
-            tu clave es ${passwordEncript}
-        `
+            tu clave es ${randomPassword}
+        `,
+        data:{
+          url:`${BASE_URL_FRONT}/user/validate/${uidUser}`,
+          name:`${nameUser} ${lastName}`,
+          pass:randomPassword
+        }
       }
       sendEmail(emailObject);
       res.status(200).json({

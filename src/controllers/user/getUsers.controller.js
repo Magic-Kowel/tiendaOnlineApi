@@ -17,8 +17,7 @@ export const getUsers = async(req,res) =>{
           on catusuarios.ecotTipoUsaurio = cattipousuario.ecodTipoUsuario
         INNER JOIN catestatus
           on catusuarios.ecodEstatus = catestatus.ecodEstatus
-      WHERE catusuarios.ecodEstatus = ?
-      `,[STATUS_USER_ACTIVE]);
+      `,);
       res.json(rows);
   } catch (error) {
     logger.error(error);
