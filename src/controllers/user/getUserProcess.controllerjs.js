@@ -1,7 +1,8 @@
 import { pool } from "../../db.js";
 import logger from "../../libs/logger.js";
 import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
-export const getUser= async(req,res) =>{
+import { STATUS_USER_PROCESS } from "../../config.js";
+export const getUserProcess= async(req,res) =>{
   try {
       const [rows] = await pool.query(`SELECT 
       catusuarios.ecodUsuario AS idUser,
@@ -16,8 +17,9 @@ export const getUser= async(req,res) =>{
       on catusuarios.ecotTipoUsaurio = cattipousuario.ecodTipoUsuario
       INNER JOIN catestatus
       on catusuarios.ecodEstatus = catestatus.ecodEstatus
-      WHERE catusuarios.ecodUsuario = ?
-    `,[req.params.idUser]);
+      WHERE catusuarios.ecodUsuario = ? 
+      AND catusuarios.ecodEstatus = ?
+    `,[req.params.idUser,STATUS_USER_PROCESS]);
       res.json(rows);
   } catch (error) {
     logger.error(error);

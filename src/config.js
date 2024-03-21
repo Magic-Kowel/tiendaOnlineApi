@@ -12,6 +12,8 @@ export const DB_DATABASE = process.env.DB_DATABASE || 'tienda';
 
 export const EMAIL_USER = process.env.EMAIL_USER||"a20170094@utem.edu.mx";
 export const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD||"hbtfbfmzprywydkr";
+export const PORT_EMAIL = process.env.PORT_EMAIL || 587;
+export const HOST_EMAIL = process.env.HOST_EMAIL || 'smtp.gmail.com';
 
 export const STATUS_USER_PROCESS = process.env.STATUS_USER_PROCESS || "01ae3cd3-144c-46a3-99aa-bb9174761b37";
 export const STATUS_USER_ACTIVE = process.env.STATUS_USER_ACTIVE || "2660376e-dbf8-44c1-b69f-b2554e3e5d4c";

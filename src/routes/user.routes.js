@@ -2,6 +2,7 @@ import { Router } from "express";
 import verifyToken from "../libs/verifyToken.js";
 import { getUsers } from "../controllers/user/getUsers.controller.js";
 import { getUser }  from "../controllers/user/getUser.controllerjs.js";
+import { getUserProcess } from "../controllers/user/getUserProcess.controllerjs.js";
 import { validateEmail } from "../controllers/user/validateEmail.controller.js";
 import { validateEmailExist } from "../controllers/user/validateEmailExist.controller.js";
 import { createUser } from "../controllers/user/createUser.controller.js";
@@ -15,10 +16,12 @@ import { deleteUser } from "../controllers/user/deleteUser.js";
 import { validateCreateUserAdmin } from "../validators/validateCreateUserAdmin.js";
 import { validateUpdateAdmin } from "../validators/validateUpdateAdmin.js";
 import { handleValidationErrors } from "../libs/handleValidationErrors.js";
+import { sendResetPasswort } from "../controllers/user/sendResetPasswort.js";
 const router = Router();
 router.get('/users',getUsers);
 router.put('/user/validate',validaeUser);
-router.get('/user/:uid',getUser );
+router.get('/user/:idUser',getUser);
+router.get('/user/process/:idUser',getUserProcess);
 router.get('/user/email/:email',validateEmail);
 router.get('/user/email/:email/:idUser',validateEmailExist);
 router.post('/user',createUser);
@@ -35,6 +38,10 @@ router.post('/user/admind',
     validateCreateUserAdmin,
     handleValidationErrors,
     createUserAdmin
+);
+router.post('/user/send/reset/passwort',
+    verifyToken,
+    sendResetPasswort
 );
 router.delete('/user/delete/:idUser',verifyToken,deleteUser);
 export default router;

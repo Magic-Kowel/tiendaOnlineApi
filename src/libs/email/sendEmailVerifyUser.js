@@ -1,17 +1,17 @@
 import nodemailer from 'nodemailer';
-import { EMAIL_USER,EMAIL_PASSWORD } from '../config.js';
+import { EMAIL_USER,EMAIL_PASSWORD,HOST_EMAIL,PORT_EMAIL } from './../../config.js';
 
 import fs from 'fs';
 import path from 'path';
 import handlebars from 'handlebars';
-export function sendEmail(emailObject){
+export function sendEmailVerifyUser(emailObject){
   // console.log(emailObject);
   // Configura el transporte de correo
 
   const transporter = nodemailer.createTransport({
-    host:'smtp.gmail.com',
+    host:HOST_EMAIL,
     secure: false, // Establece secure en false para usar TLS
-    port:587,
+    port:PORT_EMAIL,
     auth: {
       user: EMAIL_USER, 
       pass: EMAIL_PASSWORD

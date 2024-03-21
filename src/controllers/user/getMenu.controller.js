@@ -11,7 +11,8 @@ export const getMenu = async (req,res) =>{
             catsubmenu.tNombre as itemMenu,
             catsubmenu.tUrl as url,
             catestatus.tNombre as status,
-            catmenu.tNombre as Menu
+            catmenu.tNombre as Menu,
+            catsubmenu.icon as icon
         FROM catsubmenu
         INNER JOIN catestatus
         on catsubmenu.ecodEstatus = catestatus.ecodEstatus

@@ -6,3 +6,4 @@ export const ERROR_MESSAGE_CATEGORY_NOT_FOUND  ="Category not found";
 export const ERROR_MESSAGE_DELETE  ="Error when deleting";
 export const ERROR_MESSAGE_SUB_CATEGORY_NOT_FOUND ="Subcategory not found";
 export const DUPLICATE_COMBINATION ="Combinación Duplicada";
+export const FORM_SUBMITTED_SUCCESSFULLY = "Form submitted successfully"
