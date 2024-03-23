@@ -40,6 +40,7 @@ export const login = async(req,res)=>{
                     idUser: row[0].idUser,
                     message: 'Logged in successfully',
                     auth: true,
+                    userName: row[0].name,
                     token:token
                 });
             }

@@ -6,13 +6,21 @@ export const updateSubMenu = async(req,res)=>{
         const fechaActual = new Date();
         const fechaFormateada = fechaActual.toISOString().slice(0, 19).replace('T', ' ');
         console.log(fechaFormateada);
-        const {idSubMenu,name,status,url,idMenu} = req.body;
+        const {
+            idSubMenu,
+            name,
+            status,
+            url,
+            idMenu,
+            icon
+        } = req.body;
         const [result] = await pool.query(`UPDATE catsubmenu 
         SET 
         tNombre = IFNULL(?,tNombre),
         tUrl = IFNULL(?,tUrl),
         ecodEstatus = IFNULL(?,ecodEstatus),
         ecodMenu = IFNULL(?,ecodMenu),
+        icon = IFNULL(?,icon),
         fhEdicion = ?
         WHERE ecodSubmenu = ?`,
         [
@@ -20,6 +28,7 @@ export const updateSubMenu = async(req,res)=>{
             url,
             status,
             idMenu,
+            icon,
             fechaFormateada,
             idSubMenu
         ]);

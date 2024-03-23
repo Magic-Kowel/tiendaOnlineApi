@@ -6,7 +6,7 @@ const validateUpdateMenu =[
     check('idMenu')
         .exists()
         .notEmpty().withMessage("The idMenu field is required"),
-    check('idStatus')
+    check('status')
         .exists()
         .notEmpty().withMessage("The idMenu field is required"),
 ];

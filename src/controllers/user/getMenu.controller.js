@@ -1,8 +1,8 @@
 import { pool } from "../../db.js"
 import logger from "../../libs/logger.js"
+import { STATUS_USER_ACTIVE } from "../../config.js";
 import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
 export const getMenu = async (req,res) =>{
-    const {idUser} = req.body;
     try {
         const [rows] = await pool.query(`
         SELECT 
@@ -17,8 +17,10 @@ export const getMenu = async (req,res) =>{
         INNER JOIN catestatus
         on catsubmenu.ecodEstatus = catestatus.ecodEstatus
         JOIN catmenu
-        on catmenu.ecodMenu =catsubmenu.ecodMenu;
-        `,[idUser]);
+        on catmenu.ecodMenu =catsubmenu.ecodMenu
+        WHERE catmenu.ecodEstatus = ?
+        ;
+        `,[STATUS_USER_ACTIVE]);
         res.json(rows);
     } catch (error) {
         logger.error(error);

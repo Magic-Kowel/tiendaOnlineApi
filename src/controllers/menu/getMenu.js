@@ -6,7 +6,7 @@ export const getMenu = async (req,res) =>{
         const [rows] = await pool.query(`SELECT 
         ecodMenu as idMenu,
         tNombre as name,
-        ecodEstatus as idStatus
+        ecodEstatus as status
         FROM catmenu
         where ecodMenu = ?
         `,[id]);

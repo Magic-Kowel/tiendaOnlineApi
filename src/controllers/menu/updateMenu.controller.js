@@ -5,7 +5,7 @@ export const updateMenu = async(req,res)=>{
     try {
         const fechaActual = new Date();
         const fechaFormateada = fechaActual.toISOString().slice(0, 19).replace('T', ' ');
-        const {idStatus,idMenu, name} = req.body;
+        const {status,idMenu, name} = req.body;
         const [result] = await pool.query(`UPDATE catmenu 
         SET tNombre = IFNULL(?,tNombre),
         ecodEstatus = IFNULL(?,ecodEstatus),
@@ -13,7 +13,7 @@ export const updateMenu = async(req,res)=>{
         WHERE ecodMenu = ?`,
         [
             name,
-            idStatus,
+            status,
             fechaFormateada,
             idMenu
         ]);

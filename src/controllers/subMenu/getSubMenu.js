@@ -10,7 +10,8 @@ export const getSubMenu = async (req,res) =>{
             catsubmenu.tNombre as name,
             tUrl as url,
             ecodEstatus as status,
-            ecodMenu as idMenu
+            ecodMenu as idMenu,
+            icon
         FROM catsubmenu
         WHERE ecodSubmenu = ?`,[id]);
         res.json(rows);

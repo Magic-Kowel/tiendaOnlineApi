@@ -18,7 +18,7 @@ export const getSubMenus = async (req,res) =>{
         INNER JOIN catestatus
         on catsubmenu.ecodEstatus = catestatus.ecodEstatus
         INNER JOIN catmenu
-        on catmenu.ecodMenu =catsubmenu.ecodMenu;`);
+        on catmenu.ecodMenu = catsubmenu.ecodMenu;`);
         res.json(rows);
     } catch (error) {
         console.log(error);
