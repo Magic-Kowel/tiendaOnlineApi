@@ -5,19 +5,24 @@ import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
 export const getMenu = async (req,res) =>{
     try {
         const [rows] = await pool.query(`
-        SELECT 
-            catmenu.ecodMenu as idMenu,
-            catsubmenu.ecodSubmenu as idItemMenu,
-            catsubmenu.tNombre as itemMenu,
-            catsubmenu.tUrl as url,
-            catestatus.tNombre as status,
-            catmenu.tNombre as Menu,
-            catsubmenu.icon as icon
-        FROM catsubmenu
-        INNER JOIN catestatus
-        on catsubmenu.ecodEstatus = catestatus.ecodEstatus
-        JOIN catmenu
-        on catmenu.ecodMenu =catsubmenu.ecodMenu
+        SELECT DISTINCT
+            catmenu.ecodMenu AS idMenu,
+            catsubmenu.ecodSubmenu AS idItemMenu,
+            catsubmenu.tNombre AS itemMenu,
+            catsubmenu.tUrl AS url,
+            catestatus.tNombre AS status,
+            catmenu.tNombre AS Menu,
+            catsubmenu.icon AS icon
+        FROM 
+            catsubmenu
+        INNER JOIN 
+            catestatus ON catsubmenu.ecodEstatus = catestatus.ecodEstatus
+        INNER JOIN 
+            catmenu ON catmenu.ecodMenu = catsubmenu.ecodMenu
+        INNER JOIN reltipousuariopermisos
+            ON reltipousuariopermisos.ecodSubmenu = catsubmenu.ecodSubmenu
+        INNER JOIN reltipousuariomenu
+            ON reltipousuariomenu.ecodTipoUsuarioPermiso = reltipousuariopermisos.ecodRelTipoUsuarioPermiso
         WHERE catmenu.ecodEstatus = ?
         ;
         `,[STATUS_USER_ACTIVE]);

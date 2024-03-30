@@ -16,6 +16,10 @@ import { getSubMenusActive } from "../controllers/subMenu/getSubMenusActive.js";
 import { createSubMenu } from "../controllers/subMenu/createSubMenu.js";
 import { getSubMenu } from "../controllers/subMenu/getSubMenu.js";
 import { updateSubMenu } from "../controllers/subMenu/updateSubMenu.js";
+import { getSubMenuPermission } from "../controllers/subMenu/getSubMenuPermission.js";
+//permission
+import { getPermissionTypeUser } from "../controllers/user/getPermissionTypeUser.js";
+import { updatePermissionTypeUser } from "../controllers/user/updatePermissionTypeUser.js";
 //verifi token
 import verifyToken from "../libs/verifyToken.js";
 const router = Router();
@@ -27,8 +31,13 @@ router.get("/menus/active",verifyToken,getMenusActive);
 router.get("/menu/:id",verifyToken,getMenu);
 //submenu
 router.get("/submenu/:id",verifyToken,getSubMenu);
+router.get("/submenu/permission/:idTypeUser",getSubMenuPermission);
 router.get("/submenus",verifyToken,getSubMenus);
 router.get("/submenus/active",verifyToken,getSubMenusActive);
 router.post("/submenu",verifyToken,validateCreateSubmenu,handleValidationErrors,createSubMenu);
 router.patch("/submenu",verifyToken,validateUpdateSubmenu,handleValidationErrors,updateSubMenu);
+//permission 
+router.get('/permission/type/user/:idTypeUserPermission',verifyToken,getPermissionTypeUser);
+router.patch('/permission/type/user/',verifyToken,updatePermissionTypeUser);
+
 export default router;
