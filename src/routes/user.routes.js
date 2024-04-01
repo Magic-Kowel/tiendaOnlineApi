@@ -29,6 +29,7 @@ import { getAccessControlMenu } from "../controllers/user/getAccessControlMenu.c
 import { PermissionsTypeUser } from "../controllers/user/PermissionsTypeUser.js";
 import { createAccessControlMenu } from "../controllers/user/createAccessControlMenu.controller.js";
 import { getAccessControlMenuPermissions } from "../controllers/user/getAccessControlMenuPermissions.controller.js";
+import { permissionsTypeUserLogin } from "../controllers/user/permissionsTypeUser.controller.js";
 const router = Router();
 router.get('/users',getUsers);
 router.get('/users/types',getTypeUsers);
@@ -67,9 +68,11 @@ router.patch('/user/reset/passwort',
 );
 router.delete('/user/delete/:idUser',verifyToken,deleteUser);
 
-router.get('/user/access/control',getAccessControl);
-router.get('/user/access/control/menu/:typeUser',getAccessControlMenu);
+router.get('/user/access/control',verifyToken,getAccessControl);
+router.get('/user/access/control/menu/:typeUser',verifyToken,getAccessControlMenu);
 router.post('/user/permissions/type/user',verifyToken,createPermissionsTypeUser);
 router.post('/user/access/control/menu',verifyToken,createAccessControlMenu);
-router.get('/user/access/control/menu/permissions/:typeUser',getAccessControlMenuPermissions);
+router.get('/user/access/control/menu/permissions/:typeUser',verifyToken,getAccessControlMenuPermissions);
+router.get('/user/access/permissions/login/:typeUser',verifyToken,permissionsTypeUserLogin);
+
 export default router;

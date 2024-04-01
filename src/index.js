@@ -15,7 +15,7 @@ import sizeRouer from "./routes/size.routes.js";
 import ageGroupsRouer from "./routes/ageGroups.routes.js";
 import materialRouer from "./routes/materials.routes.js";
 import gendersRouer from "./routes/genders.routes.js";
-import productRouer from "./routes/product.controller.js";
+import productRouer from "./routes/product.routes.js";
 
 try {
     const app = express();
