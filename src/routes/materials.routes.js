@@ -11,7 +11,7 @@ import verifyToken from "../libs/verifyToken.js";
 const router = Router();
 router.post("/material",verifyToken,validateCreateMaterial,handleValidationErrors,createMaterial);
 router.patch("/material",verifyToken,validateUpdateMaterial,handleValidationErrors,updateMaterial);
-router.get("/materials",verifyToken,getMaterials);
+router.get("/materials",getMaterials);
 router.get("/material/:idMaterial",verifyToken,getMaterial);
 router.delete("/material/:idMaterial",verifyToken,deleteMaterial);
 export default router;

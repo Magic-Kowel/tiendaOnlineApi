@@ -1,17 +1,13 @@
 import { STATUS_USER_ACTIVE } from "../../config.js";
 import { pool } from "../../db.js";
 import logger from "../../libs/logger.js";
-export const getProducts = async (req,res) =>{
+export const getProductFilter = async (req,res) =>{
     const pageNumber= req.params.page || 1;
     const nameProduct = req.query.nameProduct|| "";
-    const materialList = req.query.materialList|| [];
-    const genderList = req.query.genderList|| [];
-    const maxPrice = req.query.maxPrice || 0;
-    const minPrice = req.query.minPrice || 0;
-    const maxAge = req.query.maxAge || 0;
-    const minAge = req.query.minAge || 0;
-    const size = req.query.size || 0;
-    const publicPerson = req.query.publicPerson || false;
+    const materialList = req.query.materialList|| []
+    const maxPrice = req.query.maxPrice || 0
+    const minPrice = req.query.minPrice || 0
+    console.log(materialList);
 
     let searchMaterial = "";
     let materialValues = [];
@@ -39,53 +35,28 @@ export const getProducts = async (req,res) =>{
                 relproductoimagen ON catproductos.ecodProductos = relproductoimagen.ecodProductos
             INNER JOIN
                 relvariacionproducto ON catproductos.ecodProductos = relvariacionproducto.ecodProductos
-            INNER JOIN 
-                tallavariacion ON tallavariacion.ecodTallavariacion = relvariacionproducto.ecodTallavariacion
-            INNER JOIN
-                grupoetario ON tallavariacion.ecodGrupoetario = grupoetario.ecodGrupoetario
-            INNER JOIN catgeneros
-            	catgeneros ON catgeneros.ecodGenero= catproductos.ecodGenero
             WHERE
                 catproductos.ecodEstatus = ? 
                 AND relvariacionproducto.bPrincipal = 1
                 AND (catproductos.tNombre LIKE CONCAT('%', COALESCE(?, catproductos.tNombre), '%'))`;
 
         const materialCondition = materialList && materialList.length > 0 ?
-            ` AND catmateriales.tNombre IN (${materialList.map(() => '?').join(', ')})` : '';
-
-        const genderCondition = genderList && genderList.length > 0 ?
-        ` AND catgeneros.tNombre IN (${genderList.map(() => '?').join(', ')})` : '';
+            `AND catmateriales.tNombre IN (${materialList.map(() => '?').join(', ')})` : '';
 
         const priceCondition = minPrice > 0 && maxPrice > 0 ?
             `AND relvariacionproducto.nPrecio BETWEEN ${minPrice} AND ${maxPrice}` : '';
 
-        const ageRange = minAge > 0 && maxAge > 0 ?
-        ` AND tallavariacion.nEdadMinima >= ${minAge}
-            AND tallavariacion.nEdadMaxima <= ${maxAge}` : '';
-
-        const sizeFilter = size > 0   ?
-        ` AND tallavariacion.nTalla = ${size}` : '';
-
-        let publictCondition = '';
-        if(nameProduct.length > 0){
-            publicPerson == "true" ? publictCondition =  ` AND grupoetario.tNombre = 'Adulto'` : publictCondition = ` AND grupoetario.tNombre = 'Infantil' `;
-        }
-
         query += materialCondition;
-        query += genderCondition;
         query += priceCondition;
-        query += ageRange;
-        query += sizeFilter;
-        query += publictCondition;
-        
+
         query += ` GROUP BY
-        catproductos.ecodProductos
+            catproductos.ecodProductos
         LIMIT ?, ?;`;
-        const queryParams = [STATUS_USER_ACTIVE, nameProduct,...materialList,...genderList, offset, pageSize];
+
+        const queryParams = [STATUS_USER_ACTIVE, nameProduct, ...materialList, offset, pageSize];
 
         const [rows] = await pool.query(query, queryParams);
-        console.log("offset",offset);
-        console.log("offset",offset);
+
         return res.json(rows)
     } catch (error) {
         console.error(error);
