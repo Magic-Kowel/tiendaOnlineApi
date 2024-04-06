@@ -84,8 +84,6 @@ export const getProducts = async (req,res) =>{
         const queryParams = [STATUS_USER_ACTIVE, nameProduct,...materialList,...genderList, offset, pageSize];
 
         const [rows] = await pool.query(query, queryParams);
-        console.log("offset",offset);
-        console.log("offset",offset);
         return res.json(rows)
     } catch (error) {
         console.error(error);

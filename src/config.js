@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 config();
-
+console.log(process.env.DB_HOST);
 export const PORT = process.env.PORT || 3000;
 export const SECRET_KEY = 'mysecrettext';
 
