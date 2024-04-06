@@ -20,7 +20,13 @@ import productRouer from "./routes/product.routes.js";
 try {
     const app = express();
 
-    app.use(cors());
+    app.use(cors(
+        {
+            origin: '*',
+  // Confía en la información del proxy
+  trustProxy: true
+        }
+    ));
     app.use(morgan('short'));
     app.use(express.json());
     //apis
