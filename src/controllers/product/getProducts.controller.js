@@ -11,7 +11,8 @@ export const getProducts = async (req,res) =>{
     const maxAge = req.query.maxAge || 0;
     const minAge = req.query.minAge || 0;
     const size = req.query.size || 0;
-    const publicPerson = req.query.publicPerson || false;
+    const isChildren = req.query.isChildren || false;
+    const isAdult = req.query.isAdult || false;
 
     let searchMaterial = "";
     let materialValues = [];
@@ -66,9 +67,13 @@ export const getProducts = async (req,res) =>{
         const sizeFilter = size > 0   ?
         ` AND tallavariacion.nTalla = ${size}` : '';
 
-        let publictCondition = '';
-        if(nameProduct.length > 0){
-            publicPerson == "true" ? publictCondition =  ` AND grupoetario.tNombre = 'Adulto'` : publictCondition = ` AND grupoetario.tNombre = 'Infantil' `;
+        let isChildrenCondition = '';
+        if(isChildren=="true"){
+            isChildrenCondition = ` AND grupoetario.tNombre = 'Infantil' `;
+        }
+        let isAdultCondition = '';
+        if(isAdult =="true"){
+            isAdultCondition = ` AND grupoetario.tNombre = 'Adulto' `;
         }
 
         query += materialCondition;
@@ -76,13 +81,14 @@ export const getProducts = async (req,res) =>{
         query += priceCondition;
         query += ageRange;
         query += sizeFilter;
-        query += publictCondition;
+        query += isChildrenCondition;
+        query += isAdultCondition;
         
         query += ` GROUP BY
         catproductos.ecodProductos
         LIMIT ?, ?;`;
         const queryParams = [STATUS_USER_ACTIVE, nameProduct,...materialList,...genderList, offset, pageSize];
-
+        console.log(isChildren);
         const [rows] = await pool.query(query, queryParams);
         return res.json(rows)
     } catch (error) {
