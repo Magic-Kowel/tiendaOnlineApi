@@ -8,7 +8,7 @@ import { updateSize } from "../controllers/size/updateSize.controller.js";
 //sizevariation
 import { createSizeVariation } from "../controllers/size/sizeVariation/createSizevariation.controller.js";
 import { getSizesVariation } from "../controllers/size/sizeVariation/getSizesVariation.controller.js";
-import { getSizeVariation } from "../controllers/size/sizeVariation/getSizevariation.controller.js";
+import { getSizeVariation } from "../controllers/size/sizeVariation/getSizeVariation.controller.js";
 
 import { deleteSizeVariation } from "../controllers/size/sizeVariation/deleteSizeVariation.controller.js";
 import { updateSizeVariation } from "../controllers/size/sizeVariation/updateSizeVariation.controller.js";
