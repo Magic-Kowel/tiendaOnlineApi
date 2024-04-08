@@ -88,7 +88,7 @@ export const getProducts = async (req,res) =>{
         catproductos.ecodProductos
         LIMIT ?, ?;`;
         const queryParams = [STATUS_USER_ACTIVE, nameProduct,...materialList,...genderList, offset, pageSize];
-        console.log(isChildren);
+        console.log(nameProduct);
         const [rows] = await pool.query(query, queryParams);
         return res.json(rows)
     } catch (error) {

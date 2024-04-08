@@ -30,6 +30,8 @@ import { PermissionsTypeUser } from "../controllers/user/PermissionsTypeUser.js"
 import { createAccessControlMenu } from "../controllers/user/createAccessControlMenu.controller.js";
 import { getAccessControlMenuPermissions } from "../controllers/user/getAccessControlMenuPermissions.controller.js";
 import { permissionsTypeUserLogin } from "../controllers/user/permissionsTypeUser.controller.js";
+
+import { sendConfirmationUser } from "../controllers/user/sendConfirmationUser.controller.js";
 const router = Router();
 router.get('/users',getUsers);
 router.get('/users/types',getTypeUsers);
@@ -74,5 +76,8 @@ router.post('/user/permissions/type/user',verifyToken,createPermissionsTypeUser)
 router.post('/user/access/control/menu',verifyToken,createAccessControlMenu);
 router.get('/user/access/control/menu/permissions/:typeUser',verifyToken,getAccessControlMenuPermissions);
 router.get('/user/access/permissions/login/:typeUser',verifyToken,permissionsTypeUserLogin);
+
+router.post('/user/send/confirmation',sendConfirmationUser);
+
 
 export default router;
