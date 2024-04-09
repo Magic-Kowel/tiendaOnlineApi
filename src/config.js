@@ -23,4 +23,5 @@ export const STATUS_USER_DELETE = process.env.STATUS_USER_DELETE || "fa6cc9a2-f2
 
 export const TYPE_USER_ADDMIN = process.env.TYPE_USER_ADDMIN || 1;
 export const TYPE_USER_CLIENT = process.env.TYPE_USER_CLIENT || 2;
-export const BASE_URL_FRONT = "http://localhost:5173";
+export const BASE_URL_FRONT = "https://pijamasbonitas.com";
+// export const BASE_URL_FRONT = "http://localhost:5173";
