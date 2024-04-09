@@ -47,8 +47,9 @@ export const getProducts = async (req,res) =>{
             INNER JOIN catgeneros
             	catgeneros ON catgeneros.ecodGenero= catproductos.ecodGenero
             WHERE
-                catproductos.ecodEstatus = ? 
-                AND relvariacionproducto.bPrincipal = 1
+                catproductos.ecodEstatus = ?
+                ${ minPrice > 0 && maxPrice > 0 ? '' : 'AND relvariacionproducto.bPrincipal = 1' }
+                
                 AND (catproductos.tNombre LIKE CONCAT('%', COALESCE(?, catproductos.tNombre), '%'))`;
 
         const materialCondition = materialList && materialList.length > 0 ?
@@ -88,7 +89,6 @@ export const getProducts = async (req,res) =>{
         catproductos.ecodProductos
         LIMIT ?, ?;`;
         const queryParams = [STATUS_USER_ACTIVE, nameProduct,...materialList,...genderList, offset, pageSize];
-        console.log(nameProduct);
         const [rows] = await pool.query(query, queryParams);
         return res.json(rows)
     } catch (error) {
