@@ -58,7 +58,7 @@ export const getProducts = async (req,res) =>{
         const genderCondition = genderList && genderList.length > 0 ?
         ` AND catgeneros.tNombre IN (${genderList.map(() => '?').join(', ')})` : '';
 
-        const priceCondition = minPrice > 0 && maxPrice > 0 ?
+        const priceCondition = minPrice >= 0 && maxPrice > 0 ?
             `AND relvariacionproducto.nPrecio BETWEEN ${minPrice} AND ${maxPrice}` : '';
 
         const ageRange = minAge > 0 && maxAge > 0 ?
