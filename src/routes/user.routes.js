@@ -21,6 +21,7 @@ import { validateCreateUserAdmin } from "../validators/validateCreateUserAdmin.j
 import { validateUpdateAdmin } from "../validators/validateUpdateAdmin.js";
 import { validateSendEmailResetPasswort } from "../validators/validateSendEmailResetPasswort.js";
 import { validateResetPasswort } from "../validators/validateResetPasswort.js";
+import { validateSendConfirmationUser } from "../validators/validateSendConfirmationUser.js";
 //----
 import { createPermissionsTypeUser } from "../controllers/user/createPermissionsTypeUser.controller.js";
 import { getTypeUserPermissions } from "../controllers/user/getTypeUserPermissions.controller.js";
@@ -77,7 +78,10 @@ router.post('/user/access/control/menu',verifyToken,createAccessControlMenu);
 router.get('/user/access/control/menu/permissions/:typeUser',verifyToken,getAccessControlMenuPermissions);
 router.get('/user/access/permissions/login/:typeUser',verifyToken,permissionsTypeUserLogin);
 
-router.post('/user/send/confirmation',sendConfirmationUser);
+router.post('/user/send/confirmation',
+    validateSendConfirmationUser,
+    handleValidationErrors,
+sendConfirmationUser);
 
 
 export default router;

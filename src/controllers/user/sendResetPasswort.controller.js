@@ -1,7 +1,11 @@
 import logger from "../../libs/logger.js";
 import { pool } from "../../db.js";
 import { STATUS_USER_ACTIVE, BASE_URL_FRONT } from "../../config.js";
-import { FORM_SUBMITTED_SUCCESSFULLY,ERROR_MESSAGE_GENERIC  } from "../../messagesSystem.js";
+import { 
+    FORM_SUBMITTED_SUCCESSFULLY,
+    ERROR_MESSAGE_GENERIC,
+    NOT_IS_ACTIVE_USER  
+} from "../../messagesSystem.js";
 import { sendEmailResetPasswort } from "../../libs/email/sendEmailResetPasswort.js";
 export const sendResetPasswort = async (req,res)  =>{
     try {
@@ -16,6 +20,12 @@ export const sendResetPasswort = async (req,res)  =>{
         WHERE ecodEstatus = ? 
         AND ecodUsuario = ?
         `,[STATUS_USER_ACTIVE,idUser]);
+        if(row.length === 0){
+            return res.status(400).json({
+                notActiveUser:true,
+                message: NOT_IS_ACTIVE_USER
+            });
+        }
         const emailObject={
             email:row[0].email,
             subject:'Restablecimiento de contraseña',
@@ -33,7 +43,7 @@ export const sendResetPasswort = async (req,res)  =>{
     } catch (error) {
         logger.error(error);
         return res.status(500).json({
-            message: error
+            message: ERROR_MESSAGE_GENERIC
         });
     }
 }
