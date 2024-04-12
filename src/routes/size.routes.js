@@ -5,6 +5,7 @@ import { getSize } from "../controllers/size/getSize.controller.js";
 import { createSize } from "../controllers/size/createSize.controller.js";
 import { deleteSize } from "../controllers/size/deleteSize.controller.js";
 import { updateSize } from "../controllers/size/updateSize.controller.js";
+import { getSizesListsSwitch } from "../controllers/size/getSizesListsSwitch.js";
 //sizevariation
 import { createSizeVariation } from "../controllers/size/sizeVariation/createSizevariation.controller.js";
 import { getSizesVariation } from "../controllers/size/sizeVariation/getSizesVariation.controller.js";
@@ -24,6 +25,7 @@ const router = Router();
 try {
     //routes sizes
     router.get("/sizes",verifyToken,getSizes);
+    router.get("/sizes/lists/switch",getSizesListsSwitch);
     router.get("/size/:idSize",verifyToken,getSize);
     router.post("/size",verifyToken,validateCreateSize,handleValidationErrors,createSize);
     router.delete("/size/:idSize",deleteSize);

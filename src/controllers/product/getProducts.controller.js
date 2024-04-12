@@ -6,6 +6,7 @@ export const getProducts = async (req,res) =>{
     const nameProduct = req.query.nameProduct|| "";
     const materialList = req.query.materialList|| [];
     const genderList = req.query.genderList|| [];
+    const sizeList = req.query.sizeList|| [];
     const maxPrice = req.query.maxPrice || 0;
     const minPrice = req.query.minPrice || 0;
     const maxAge = req.query.maxAge || 0;
@@ -13,7 +14,7 @@ export const getProducts = async (req,res) =>{
     const size = req.query.size || 0;
     const isChildren = req.query.isChildren || false;
     const isAdult = req.query.isAdult || false;
-
+    console.log(sizeList);
     let searchMaterial = "";
     let materialValues = [];
     if (materialList && materialList.length > 0) {
@@ -42,6 +43,8 @@ export const getProducts = async (req,res) =>{
                 relvariacionproducto ON catproductos.ecodProductos = relvariacionproducto.ecodProductos
             INNER JOIN 
                 tallavariacion ON tallavariacion.ecodTallavariacion = relvariacionproducto.ecodTallavariacion
+            INNER JOIN 
+				talla ON talla.ecodTalla = tallavariacion.ecodTalla
             INNER JOIN
                 grupoetario ON tallavariacion.ecodGrupoetario = grupoetario.ecodGrupoetario
             INNER JOIN catgeneros
@@ -57,6 +60,9 @@ export const getProducts = async (req,res) =>{
 
         const genderCondition = genderList && genderList.length > 0 ?
         ` AND catgeneros.tNombre IN (${genderList.map(() => '?').join(', ')})` : '';
+
+        const sizeCondition = sizeList && sizeList.length > 0 ?
+            ` AND talla.tTalla IN (${sizeList.map(() => '?').join(', ')})` : '';
 
         const priceCondition = minPrice >= 0 && maxPrice > 0 ?
             `AND relvariacionproducto.nPrecio BETWEEN ${minPrice} AND ${maxPrice}` : '';
@@ -79,6 +85,7 @@ export const getProducts = async (req,res) =>{
 
         query += materialCondition;
         query += genderCondition;
+        query += sizeCondition;
         query += priceCondition;
         query += ageRange;
         query += sizeFilter;
@@ -88,7 +95,7 @@ export const getProducts = async (req,res) =>{
         query += ` GROUP BY
         catproductos.ecodProductos
         LIMIT ?, ?;`;
-        const queryParams = [STATUS_USER_ACTIVE, nameProduct,...materialList,...genderList, offset, pageSize];
+        const queryParams = [STATUS_USER_ACTIVE, nameProduct,...materialList,...genderList,...sizeList, offset, pageSize];
         const [rows] = await pool.query(query, queryParams);
         return res.json(rows)
     } catch (error) {
