@@ -8,6 +8,7 @@ export const updateUser = async (req,res) =>{
             nameUser,
             lastName,
             email,
+            idTypeUser,
             birthdate
         } = req.body;
         const [result] = await pool.query(`UPDATE 
@@ -15,12 +16,14 @@ export const updateUser = async (req,res) =>{
         SET tNombre = IFNULL(?,tNombre),
         tApellido = IFNULL(?,tApellido),
         tCorreo = IFNULL(?,tCorreo),
-        fhNacimiento = IFNULL(?,fhNacimiento)  
+        ecotTipoUsaurio = IFNULL(?,ecotTipoUsaurio),
+        fhNacimiento = IFNULL(?,fhNacimiento)
         WHERE ecodUsuario = ?`,
         [
             nameUser,
             lastName,
             email,
+            idTypeUser,
             birthdate,
             idUser
         ]);

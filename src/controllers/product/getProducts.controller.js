@@ -75,14 +75,13 @@ export const getProducts = async (req,res) =>{
         ` AND tallavariacion.nTalla = ${size}` : '';
 
         let isChildrenCondition = '';
-        if(isChildren=="true"){
+        if(isChildren == "true" && isAdult =="false"){
             isChildrenCondition = ` AND grupoetario.tNombre = 'Infantil' `;
         }
         let isAdultCondition = '';
-        if(isAdult =="true"){
+        if(isAdult =="true" && isChildren == "false"){
             isAdultCondition = ` AND grupoetario.tNombre = 'Adulto' `;
         }
-
         query += materialCondition;
         query += genderCondition;
         query += sizeCondition;

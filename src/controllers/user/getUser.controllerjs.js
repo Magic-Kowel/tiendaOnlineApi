@@ -5,6 +5,7 @@ export const getUser= async(req,res) =>{
   try {
       const [rows] = await pool.query(`SELECT 
       catusuarios.ecodUsuario AS idUser,
+      ecodTipoUsuario as idTypeUser,
       catusuarios.tNombre AS nameUser,
       catusuarios.tApellido AS lastName,
       catusuarios.tCorreo AS email,
