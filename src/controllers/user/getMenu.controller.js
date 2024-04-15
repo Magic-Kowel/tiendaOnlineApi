@@ -3,6 +3,7 @@ import logger from "../../libs/logger.js"
 import { STATUS_USER_ACTIVE } from "../../config.js";
 import { ERROR_MESSAGE_GENERIC } from "../../messagesSystem.js";
 export const getMenu = async (req,res) =>{
+    const {idUser} = req.body;
     try {
         const [rows] = await pool.query(`
         SELECT DISTINCT
@@ -23,9 +24,12 @@ export const getMenu = async (req,res) =>{
             ON reltipousuariopermisos.ecodSubmenu = catsubmenu.ecodSubmenu
         INNER JOIN reltipousuariomenu
             ON reltipousuariomenu.ecodTipoUsuarioPermiso = reltipousuariopermisos.ecodRelTipoUsuarioPermiso
-        WHERE catmenu.ecodEstatus = ?
+        INNER JOIN cattipousuario on cattipousuario.ecodTipoUsuario = reltipousuariomenu.ecodTipoUsuario
+        INNER JOIN catusuarios on catusuarios.ecotTipoUsaurio = cattipousuario.ecodTipoUsuario
+        WHERE catusuarios.ecodUsuario = ? 
+        AND catmenu.ecodEstatus = ?
         ;
-        `,[STATUS_USER_ACTIVE]);
+    `,[idUser,STATUS_USER_ACTIVE]);
         res.json(rows);
     } catch (error) {
         logger.error(error);

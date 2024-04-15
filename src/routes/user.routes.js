@@ -33,6 +33,9 @@ import { getAccessControlMenuPermissions } from "../controllers/user/getAccessCo
 import { permissionsTypeUserLogin } from "../controllers/user/permissionsTypeUser.controller.js";
 
 import { sendConfirmationUser } from "../controllers/user/sendConfirmationUser.controller.js";
+
+
+import { deleteAccessControlMenu } from "../controllers/user/deleteAccessControlMenu.controller.js";
 const router = Router();
 router.get('/users',getUsers);
 router.get('/users/types',getTypeUsers);
@@ -75,6 +78,9 @@ router.get('/user/access/control',verifyToken,getAccessControl);
 router.get('/user/access/control/menu/:typeUser',verifyToken,getAccessControlMenu);
 router.post('/user/permissions/type/user',verifyToken,createPermissionsTypeUser);
 router.post('/user/access/control/menu',verifyToken,createAccessControlMenu);
+
+router.delete('/user/access/control/menu/:idPermission',verifyToken,deleteAccessControlMenu);
+
 router.get('/user/access/control/menu/permissions/:typeUser',verifyToken,getAccessControlMenuPermissions);
 router.get('/user/access/permissions/login/:typeUser',verifyToken,permissionsTypeUserLogin);
 

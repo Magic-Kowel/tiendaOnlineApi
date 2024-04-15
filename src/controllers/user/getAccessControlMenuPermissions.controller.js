@@ -5,6 +5,7 @@ export const getAccessControlMenuPermissions = async (req,res) =>{
     try {
         const typeUser = req.params.typeUser;
         const [rows] = await pool.query(`SELECT
+        ecodRelTipoUsuarioMenu as idPermission,
         reltipousuariomenu.ecodTipoUsuarioPermiso as idMenuPermission,
         catpermisos.tNombre as permission
     FROM 
@@ -17,7 +18,7 @@ export const getAccessControlMenuPermissions = async (req,res) =>{
         ON catpermisos.ecodPermiso =  reltipousuariopermisos.ecodPermiso
     INNER JOIN cattipousuario
         ON cattipousuario.ecodTipoUsuario = reltipousuariomenu.ecodTipoUsuario
-        WHERE cattipousuario.ecodTipoUsuario =?`,[typeUser]);
+        WHERE cattipousuario.ecodTipoUsuario = ?`,[typeUser]);
         res.json(rows);
     } catch (error) {
         logger.error(error);
