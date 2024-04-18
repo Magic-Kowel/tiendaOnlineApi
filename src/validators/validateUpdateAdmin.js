@@ -16,5 +16,9 @@ const validateUpdateAdmin =[
     check('birthdate')
         .exists()
         .notEmpty().withMessage("The idMenu field is required"),
+    check('statusCheck')
+        .exists()
+        .isBoolean()
+        .withMessage("The statusCheck field is required"),
 ];
 export { validateUpdateAdmin };

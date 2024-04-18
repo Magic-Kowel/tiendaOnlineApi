@@ -11,6 +11,7 @@ import { validateCreateProduct } from "../validators/validateCreateProduct.js";
 import { handleValidationErrors } from "../libs/handleValidationErrors.js";
 import { deleteImagenProduct } from "../controllers/product/deleteImagenProduct.js";
 import { getProductDescription } from "../controllers/product/getProductDescription.controller.js";
+import { getTotalPagesProducts } from "../controllers/product/getTotalPagesProducts.js";
 const router = Router();
 try {
     const upload = multer({ dest: "files" });
@@ -28,6 +29,7 @@ try {
     );
     router.delete("/product/:idProduct",verifyToken,deleteProduct);
     router.delete("/product/imagen/:idImagen",verifyToken,deleteImagenProduct);
+    router.get("/products/total/page/", getTotalPagesProducts);
     router.get("/products/:page/", getProducts);
     router.get("/product/:idProduct",verifyToken, getProduct);
     router.get("/product/description/:idProduct", getProductDescription);

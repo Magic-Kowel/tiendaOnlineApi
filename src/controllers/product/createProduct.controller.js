@@ -6,15 +6,17 @@ import { STATUS_USER_ACTIVE } from "../../config.js";
 import { v2 as cloudinary } from 'cloudinary';
 import { conectCloudinary } from "../../libs/conectCloudinary.js";
 import { clearFilesUpload } from "../../libs/clearFilesUpload.js";
+
+// import uploadFileFTP from "../../libs/uploadFileFTP.js";
 export const createProduct = async (req,res) =>{
     conectCloudinary(cloudinary);
-    console.log("imageUrls",req.body.imageUrls);
     if ((!req.files || req.files.length === 0 ) && (!req.body.imageUrls || req.body.imageUrls.length ===0)) {
         return res.status(400).json({ message: "No se han proporcionado alguna imagen" });
     }
     let connection;
     const imagensUpload = [];
     try {
+        // await uploadFileFTP(req.files)
         for (const file of req.files) {
             try {
                 const result = await cloudinary.uploader.upload(file.path, { folder: 'magicImages' });
@@ -23,6 +25,7 @@ export const createProduct = async (req,res) =>{
                 console.error("Error al procesar un archivo:", error);
                 imagensUpload.push({ message: "Error al procesar el archivo" });
             }
+  
         }
         connection = await pool.getConnection();
         await connection.beginTransaction();

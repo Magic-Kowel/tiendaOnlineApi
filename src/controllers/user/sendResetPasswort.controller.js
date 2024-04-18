@@ -36,6 +36,7 @@ export const sendResetPasswort = async (req,res)  =>{
             }
         }
         const response = await sendEmailResetPasswort(emailObject);
+        console.log(response);
         res.status(200).json({
             send:true,
             message:FORM_SUBMITTED_SUCCESSFULLY

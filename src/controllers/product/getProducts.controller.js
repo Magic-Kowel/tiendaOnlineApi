@@ -21,7 +21,7 @@ export const getProducts = async (req,res) =>{
         searchMaterial = ` AND catmateriales.tNombre IN (?)`;
         materialValues = materialList;
     }
-    const pageSize=30;
+    const pageSize=12;
     // Calcula el offset para la paginación
     const offset = (pageNumber - 1) * pageSize;
     try {

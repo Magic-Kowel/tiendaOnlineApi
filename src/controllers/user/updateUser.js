@@ -1,6 +1,7 @@
 import logger from "../../libs/logger.js"
 import { pool } from "../../db.js";
 import { SUCCESS_MESSAGE_UPDATE } from "../../messagesSystem.js";
+import { STATUS_USER_DELETE,STATUS_USER_ACTIVE } from "../../config.js";
 export const updateUser = async (req,res) =>{
     try {
         const {
@@ -9,7 +10,8 @@ export const updateUser = async (req,res) =>{
             lastName,
             email,
             idTypeUser,
-            birthdate
+            birthdate,
+            statusCheck
         } = req.body;
         const [result] = await pool.query(`UPDATE 
         catusuarios 
@@ -17,7 +19,8 @@ export const updateUser = async (req,res) =>{
         tApellido = IFNULL(?,tApellido),
         tCorreo = IFNULL(?,tCorreo),
         ecotTipoUsaurio = IFNULL(?,ecotTipoUsaurio),
-        fhNacimiento = IFNULL(?,fhNacimiento)
+        fhNacimiento = IFNULL(?,fhNacimiento),
+        ecodEstatus = IFNULL(?,ecodEstatus)
         WHERE ecodUsuario = ?`,
         [
             nameUser,
@@ -25,6 +28,7 @@ export const updateUser = async (req,res) =>{
             email,
             idTypeUser,
             birthdate,
+            statusCheck?STATUS_USER_ACTIVE:STATUS_USER_DELETE,
             idUser
         ]);
         if(result.affectedRows > 0){
