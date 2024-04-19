@@ -7,7 +7,6 @@ import { v2 as cloudinary } from 'cloudinary';
 import { conectCloudinary } from "../../libs/conectCloudinary.js";
 import { clearFilesUpload } from "../../libs/clearFilesUpload.js";
 
-// import uploadFileFTP from "../../libs/uploadFileFTP.js";
 export const createProduct = async (req,res) =>{
     conectCloudinary(cloudinary);
     if ((!req.files || req.files.length === 0 ) && (!req.body.imageUrls || req.body.imageUrls.length ===0)) {
@@ -16,7 +15,6 @@ export const createProduct = async (req,res) =>{
     let connection;
     const imagensUpload = [];
     try {
-        // await uploadFileFTP(req.files)
         for (const file of req.files) {
             try {
                 const result = await cloudinary.uploader.upload(file.path, { folder: 'magicImages' });

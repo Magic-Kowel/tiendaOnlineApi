@@ -1,6 +1,10 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+
+import https from "https"
+import fs from "fs"
+import path  from 'path'
 // import { Server as WebSocketServer } from "socket.io";
 // import http from "http";
 import { PORT } from './config.js';
@@ -25,7 +29,7 @@ try {
         {
             origin: '*',
   // Confía en la información del proxy
-  trustProxy: true
+    trustProxy: true
         }
     ));
     app.use(morgan('short'));
@@ -48,7 +52,13 @@ try {
     })
     // const server = http.createServer(app);
     // const httpServer = server.listen(PORT);
-    app.listen(PORT);
+    //configurar  ssl para las rutas https
+    const options = {
+        key: fs.readFileSync(path.resolve(process.cwd(), "./ssl/apache-selfsigned.key")),
+        cert: fs.readFileSync(path.resolve(process.cwd(), "./ssl/apache-selfsigned.crt"))
+    };
+    https.createServer(options, app).listen(PORT);
+    // app.listen(PORT);
     console.log(`server on port ${PORT}`)
 } catch (error) {
     console.error(error);
