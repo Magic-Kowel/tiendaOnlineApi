@@ -53,12 +53,12 @@ try {
     // const server = http.createServer(app);
     // const httpServer = server.listen(PORT);
     //configurar  ssl para las rutas https
-    const options = {
-        key: fs.readFileSync(path.resolve(process.cwd(), "./ssl/apache-selfsigned.key")),
-        cert: fs.readFileSync(path.resolve(process.cwd(), "./ssl/apache-selfsigned.crt"))
-    };
-    https.createServer(options, app).listen(PORT);
-    // app.listen(PORT);
+    // const options = {
+    //     key: fs.readFileSync(path.resolve(process.cwd(), "./ssl/apache-selfsigned.key")),
+    //     cert: fs.readFileSync(path.resolve(process.cwd(), "./ssl/apache-selfsigned.crt"))
+    // };
+    // https.createServer(options, app).listen(PORT);
+    app.listen(PORT);
     console.log(`server on port ${PORT}`)
 } catch (error) {
     console.error(error);
