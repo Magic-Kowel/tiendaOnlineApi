@@ -12,6 +12,7 @@ import { handleValidationErrors } from "../libs/handleValidationErrors.js";
 import { deleteImagenProduct } from "../controllers/product/deleteImagenProduct.js";
 import { getProductDescription } from "../controllers/product/getProductDescription.controller.js";
 import { getTotalPagesProducts } from "../controllers/product/getTotalPagesProducts.js";
+import { registerVisitProduct } from "../controllers/product/registerVisitProduct.conroller.js";
 const router = Router();
 try {
     const upload = multer({ dest: "files" });
@@ -21,6 +22,9 @@ try {
         validateCreateProduct,
         handleValidationErrors,
         createProduct
+    );
+    router.post("/product/visit",
+    registerVisitProduct
     );
     router.patch("/product",
         verifyToken,
