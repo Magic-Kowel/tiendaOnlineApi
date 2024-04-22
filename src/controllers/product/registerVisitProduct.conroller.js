@@ -6,7 +6,7 @@ export const registerVisitProduct = async (req,res) =>{
     try {
         const idVisitProduct = uid(32);
         const {idProduct} = req.body;
-        console.log(idProduct);
+        console.log("registrar" , idProduct);
         const [row] = await pool.query(`INSERT INTO catproductovistas(
             ecodProductovista,
             ecodProductos

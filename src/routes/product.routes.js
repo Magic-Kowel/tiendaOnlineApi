@@ -13,6 +13,7 @@ import { deleteImagenProduct } from "../controllers/product/deleteImagenProduct.
 import { getProductDescription } from "../controllers/product/getProductDescription.controller.js";
 import { getTotalPagesProducts } from "../controllers/product/getTotalPagesProducts.js";
 import { registerVisitProduct } from "../controllers/product/registerVisitProduct.conroller.js";
+import { getVisitProducts } from "../controllers/product/getVisitProducts.controller.js";
 const router = Router();
 try {
     const upload = multer({ dest: "files" });
@@ -23,9 +24,8 @@ try {
         handleValidationErrors,
         createProduct
     );
-    router.post("/product/visit",
-    registerVisitProduct
-    );
+    router.get("/product/visit/", getVisitProducts);
+    router.post("/product/visit",registerVisitProduct);
     router.patch("/product",
         verifyToken,
         upload.array('files', 10),
@@ -38,6 +38,7 @@ try {
     router.get("/product/:idProduct",verifyToken, getProduct);
     router.get("/product/description/:idProduct", getProductDescription);
     router.get("/product/imagens/:idProduct", getImagesProdruct);
+
 
 } catch (error) {
     console.error(error);
