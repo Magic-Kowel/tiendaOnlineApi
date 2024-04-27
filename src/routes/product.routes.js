@@ -14,6 +14,7 @@ import { getProductDescription } from "../controllers/product/getProductDescript
 import { getTotalPagesProducts } from "../controllers/product/getTotalPagesProducts.js";
 import { registerVisitProduct } from "../controllers/product/registerVisitProduct.conroller.js";
 import { getVisitProducts } from "../controllers/product/getVisitProducts.controller.js";
+import { getTopVisitsProducts } from "../controllers/product/getTopVisitsProducts.controller.js";
 const router = Router();
 try {
     const upload = multer({ dest: "files" });
@@ -25,6 +26,7 @@ try {
         createProduct
     );
     router.get("/product/visit/", getVisitProducts);
+    router.get("/product/top/visit/", getTopVisitsProducts);
     router.post("/product/visit",registerVisitProduct);
     router.patch("/product",
         verifyToken,

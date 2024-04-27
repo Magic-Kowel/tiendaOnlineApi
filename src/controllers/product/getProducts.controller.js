@@ -53,7 +53,7 @@ export const getProducts = async (req,res) =>{
                 catproductos.ecodEstatus = ?
                 ${ minPrice > 0 && maxPrice > 0 ? '' : 'AND relvariacionproducto.bPrincipal = 1' }
                 
-                AND (catproductos.tNombre LIKE CONCAT('%', COALESCE(?, catproductos.tNombre), '%'))`;
+                AND (catproductos.tNombre LIKE CONCAT('%', COALESCE(TRIM(?), catproductos.tNombre), '%'))`;
 
         const materialCondition = materialList && materialList.length > 0 ?
             ` AND catmateriales.tNombre IN (${materialList.map(() => '?').join(', ')})` : '';
