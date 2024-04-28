@@ -14,7 +14,6 @@ export const getProducts = async (req,res) =>{
     const size = req.query.size || 0;
     const isChildren = req.query.isChildren || false;
     const isAdult = req.query.isAdult || false;
-    console.log(sizeList);
     let searchMaterial = "";
     let materialValues = [];
     if (materialList && materialList.length > 0) {
@@ -48,7 +47,7 @@ export const getProducts = async (req,res) =>{
             INNER JOIN
                 grupoetario ON tallavariacion.ecodGrupoetario = grupoetario.ecodGrupoetario
             INNER JOIN catgeneros
-            	catgeneros ON catgeneros.ecodGenero= catproductos.ecodGenero
+            	catgeneros ON catgeneros.ecodGenero = catproductos.ecodGenero
             WHERE
                 catproductos.ecodEstatus = ?
                 ${ minPrice > 0 && maxPrice > 0 ? '' : 'AND relvariacionproducto.bPrincipal = 1' }
@@ -91,12 +90,21 @@ export const getProducts = async (req,res) =>{
         query += isChildrenCondition;
         query += isAdultCondition;
         
+        let queryTotal = `
+            SELECT CEIL(COUNT(*) / 12) AS total
+            FROM (
+                ${query}
+                GROUP BY catproductos.ecodProductos
+            ) AS subconsulta
+        `;
         query += ` GROUP BY
         catproductos.ecodProductos
-        LIMIT ?, ?;`;
+        LIMIT ?, ?`;
         const queryParams = [STATUS_USER_ACTIVE, nameProduct,...materialList,...genderList,...sizeList, offset, pageSize];
-        const [rows] = await pool.query(query, queryParams);
-        return res.json(rows)
+        const [products] = await pool.query(query, queryParams);
+        // Agrega todos los parámetros necesarios para la subconsulta
+        const [total] = await pool.query(queryTotal, queryParams);
+        return res.json({total,products})
     } catch (error) {
         console.error(error);
         logger.error(error);

@@ -10,3 +10,5 @@ export const FORM_SUBMITTED_SUCCESSFULLY = "Form submitted successfully"
 export const PASSWORDS_DO_NOT_MATCH = "Passwords do not match";
 export const SUCCESS_MESSAGE_EMAIL_SENDED = "Message sended";
 export const NOT_IS_ACTIVE_USER = "Not is active user";
+export const NOT_VALID_IMAGES = "There are no valid images";
+
